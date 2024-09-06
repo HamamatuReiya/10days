@@ -57,3 +57,5 @@ void TitleScene::Draw() {
 
 #pragma endregion
 }
+
+void TitleScene::SceneReset() {}

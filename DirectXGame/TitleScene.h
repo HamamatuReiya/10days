@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "Scene.h"
 
 class TitleScene {
 public:
@@ -33,6 +34,14 @@ public:
 	/// 描画
 	/// </summary>
 	void Draw();
+
+public:
+	void SceneReset();
+
+	bool isSceneEnd_ = false;
+
+	bool IsSceneEnd() { return isSceneEnd_; }
+	SceneType NextScene() { return SceneType::kTitle; }
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
