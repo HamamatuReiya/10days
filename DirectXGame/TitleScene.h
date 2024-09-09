@@ -8,6 +8,8 @@
 #include "WorldTransform.h"
 #include "Scene.h"
 
+#include "fade/Fade.h"
+
 class TitleScene {
 public:
 	/// <summary>
@@ -41,7 +43,7 @@ public:
 	bool isSceneEnd_ = false;
 
 	bool IsSceneEnd() { return isSceneEnd_; }
-	SceneType NextScene() { return SceneType::kTitle; }
+	SceneType NextScene() { return SceneType::kGamePlay; }
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -52,4 +54,14 @@ private: // メンバ変数
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
+
+	// タイトル画像
+	Sprite* textureTitle_;
+	uint32_t titleHandle_;
+
+	// フェード
+	std::unique_ptr<Fade> fade_;
+	bool fadeTimerFlag_;
+	const float kFadeTimer_ = 1.657f * 60.0f;
+	float fadeTimer_ = kFadeTimer_;
 };
