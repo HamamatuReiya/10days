@@ -33,7 +33,7 @@ void TitleScene::Initialize() {
 void TitleScene::Update() {
 	// SE
 	if (isClick == true) {
-		playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);
+		/*playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);*/
 		isClick = false;
 	}
 
