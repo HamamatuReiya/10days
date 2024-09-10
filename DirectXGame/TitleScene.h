@@ -64,4 +64,16 @@ private: // メンバ変数
 	bool fadeTimerFlag_;
 	const float kFadeTimer_ = 1.657f * 60.0f;
 	float fadeTimer_ = kFadeTimer_;
+
+	// BGM
+	uint32_t titleBGMHandle_;
+	uint32_t playTitleBGM_;
+	bool isTitleBGM_;
+	bool isTitleBGM;
+
+	// SE
+	uint32_t systemHandle_;
+	uint32_t playSystem_;
+	bool isSystem_;
+	bool isClick;
 };

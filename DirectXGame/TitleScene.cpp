@@ -19,11 +19,28 @@ void TitleScene::Initialize() {
 	fade_->Initialize();
 	// フェードインの開始
 	fade_->FadeInStart();
+
+	// BGM
+	titleBGMHandle_ = audio_->LoadWave("BGM/title.mp3");
+	// titleBGMHandle_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
+	isTitleBGM = false;
+
+	// SE
+	systemHandle_ = audio_->LoadWave("SE/system.mp3");
+	isClick = false;
 }
 
 void TitleScene::Update() {
+	// SE
+	if (isClick == true) {
+		playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);
+		isClick = false;
+	}
+
+	// シーン移動
 	if (input_->TriggerKey(DIK_SPACE)&& fadeTimerFlag_ == false) {
 		fadeTimerFlag_ = true;
+		isClick = true;
 		fade_->FadeOutStart();
 	}
 	if (fadeTimerFlag_ == true) {

@@ -70,6 +70,12 @@ private: // メンバ変数
 	// 時間
 	std::unique_ptr<Timer> timer_;
 
+	// SE
+	uint32_t chainHandle_;
+	uint32_t playChain_;
+	bool isChain_;
+	bool isSound;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>

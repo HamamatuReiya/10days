@@ -29,9 +29,19 @@ void GameScene::Initialize() {
 	// 時間
 	timer_ = std::make_unique<Timer>();
 	timer_->Initialize();
+
+	// SE
+	chainHandle_ = audio_->LoadWave("SE/chain.mp3");
+	isSound = false;
 }
 
 void GameScene::Update() { 
+	// SE
+	if (isSound == false) {
+		playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
+		isSound = true;
+	}
+
 	chain_->Update(speed);
 
 	// 時間更新
