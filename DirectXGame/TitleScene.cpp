@@ -22,7 +22,7 @@ void TitleScene::Initialize() {
 
 	// BGM
 	titleBGMHandle_ = audio_->LoadWave("BGM/title.mp3");
-	// titleBGMHandle_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
+	//titleBGMHandle_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
 	isTitleBGM = false;
 
 	// SE
@@ -33,7 +33,7 @@ void TitleScene::Initialize() {
 void TitleScene::Update() {
 	// SE
 	if (isClick == true) {
-		/*playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);*/
+		playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);
 		isClick = false;
 	}
 

@@ -45,7 +45,7 @@ void GameScene::Update() {
 	}
 	// SE
 	if (isSound == false) {
-		/*playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);*/
+		playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
 		isSound = true;
 	}
 
