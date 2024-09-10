@@ -9,6 +9,7 @@
 #include "Scene.h"
 
 #include "fade/Fade.h"
+#include "Timer.h"
 
 class TitleScene {
 public:
@@ -58,6 +59,13 @@ private: // メンバ変数
 	// タイトル画像
 	Sprite* textureTitle_;
 	uint32_t titleHandle_;
+
+	// 時間
+	std::unique_ptr<Timer> timer_;
+	const int kFrameCount = 0;
+	int frameCount = kFrameCount;
+	//確認フラグ
+	bool st = false;
 
 	// フェード
 	std::unique_ptr<Fade> fade_;
