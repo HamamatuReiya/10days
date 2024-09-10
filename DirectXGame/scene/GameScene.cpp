@@ -28,6 +28,13 @@ void GameScene::Initialize() {
 	modelSpike2_.reset(Model::CreateFromOBJ("Spike02", true));
 	spike_->Initialize(modelSpike1_.get(), modelSpike2_.get());
 	
+	player_ = std::make_unique<Player>();
+	modelPlayer_[0].reset(Model::CreateFromOBJ("Player01", true));
+	modelPlayer_[1].reset(Model::CreateFromOBJ("Player02", true));
+	modelPlayer_[2].reset(Model::CreateFromOBJ("Player03", true));
+	modelPlayer_[3].reset(Model::CreateFromOBJ("Player04", true));
+	modelPlayer_[4].reset(Model::CreateFromOBJ("Player05", true));
+	player_->Initialize(modelPlayer_[0].get(), modelPlayer_[1].get(), modelPlayer_[2].get(), modelPlayer_[3].get(), modelPlayer_[4].get());
 
 	// 時間
 	timer_ = std::make_unique<Timer>();
@@ -51,6 +58,7 @@ void GameScene::Update() {
 
 	chain_->Update(speed);
 	spike_->Update(speed);
+	player_->Update();
 
 	// 時間更新
 	timer_->Update();
@@ -83,6 +91,7 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	
 	chain_->Draw(viewProjection_);
+	player_->Draw(viewProjection_);
 	spike_->Draw(viewProjection_);
 	
 	/// </summary>

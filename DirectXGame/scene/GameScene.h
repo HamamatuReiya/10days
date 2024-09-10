@@ -10,7 +10,7 @@
 #include "Chain.h"
 #include "Spike.h"
 #include "Scene.h"
-
+#include "Player.h"
 #include "Timer.h"
 
 /// <summary>
@@ -71,6 +71,9 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelSpike1_;
 	std::unique_ptr<Model> modelSpike2_;
 	std::unique_ptr<Spike> spike_;
+
+	std::unique_ptr<Model> modelPlayer_[5];
+	std::unique_ptr<Player> player_;
 
 	// 時間
 	std::unique_ptr<Timer> timer_;
