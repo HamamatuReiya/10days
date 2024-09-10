@@ -65,6 +65,12 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelChain_;
 	std::unique_ptr<Chain> chain_;
 
+	// SE
+	uint32_t chainHandle_;
+	uint32_t playChain_;
+	bool isChain_;
+	bool isSound;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>

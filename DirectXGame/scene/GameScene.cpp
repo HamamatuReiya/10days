@@ -25,9 +25,19 @@ void GameScene::Initialize() {
 	modelChain_.reset(Model::CreateFromOBJ("Chain", true));
 	// 天球の初期化
 	chain_->Initialize(modelChain_.get());
+
+	// SE
+	chainHandle_ = audio_->LoadWave("SE/chain.mp3");
+	isSound = false;
 }
 
 void GameScene::Update() { 
+	// SE
+	if (isSound == false) {
+		playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
+		isSound = true;
+	}
+
 	chain_->Update(speed);
 }
 
