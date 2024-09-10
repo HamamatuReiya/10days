@@ -25,10 +25,18 @@ void GameScene::Initialize() {
 	modelChain_.reset(Model::CreateFromOBJ("Chain", true));
 	// 天球の初期化
 	chain_->Initialize(modelChain_.get());
+
+	// 時間
+	timer_ = std::make_unique<Timer>();
+	timer_->Initialize();
 }
 
 void GameScene::Update() { 
 	chain_->Update(speed);
+
+	// 時間更新
+	frameCount++;
+	timer_->Update(frameCount);
 }
 
 void GameScene::Draw() {
@@ -72,6 +80,9 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+
+	//  時間表示
+	timer_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

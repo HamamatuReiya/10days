@@ -13,10 +13,6 @@ void TitleScene::Initialize() {
 	titleHandle_ = TextureManager::Load("title.png");
 	textureTitle_ = Sprite::Create(titleHandle_, {0.0f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 
-	// 時間
-	timer_ = std::make_unique<Timer>();
-	timer_->Initialize();
-
 	// フェードの生成
 	fade_ = std::make_unique<Fade>();
 	// フェードの初期化
@@ -38,16 +34,6 @@ void TitleScene::Update() {
 	}
 	// フェードの更新
 	fade_->Update();
-
-	// 時間更新
-	if (input_->TriggerKey(DIK_A)) {
-		st = true;
-	}
-	if (st == true) {
-		frameCount++;
-	}
-	
-	timer_->Update(frameCount);
 }
 
 void TitleScene::Draw() {
@@ -89,10 +75,8 @@ void TitleScene::Draw() {
 	/// </summary>
 
 	//タイトルの画像
-	//textureTitle_->Draw();
-	//  時間表示
-	timer_->Draw();
-
+	textureTitle_->Draw();
+	
 	// フェードの描画
 	fade_->Draw();
 

@@ -10,6 +10,8 @@
 #include "Chain.h"
 #include "Scene.h"
 
+#include "Timer.h"
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -64,6 +66,11 @@ private: // メンバ変数
 
 	std::unique_ptr<Model> modelChain_;
 	std::unique_ptr<Chain> chain_;
+
+	// 時間
+	std::unique_ptr<Timer> timer_;
+	const int kFrameCount = 0;
+	int frameCount = kFrameCount;
 
 	/// <summary>
 	/// ゲームシーン用
