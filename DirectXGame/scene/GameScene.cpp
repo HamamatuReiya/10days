@@ -11,9 +11,25 @@ void GameScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+
+	// ワールドトランスフォームの初期化
+	worldTransform_.Initialize();
+	// ビュープロジェクションの初期化
+	viewProjection_.Initialize();
+
+	speed = 0.2f;
+
+	chain_ = std::make_unique<Chain>();
+
+	// 3Dモデルの生成
+	modelChain_.reset(Model::CreateFromOBJ("Chain", true));
+	// 天球の初期化
+	chain_->Initialize(modelChain_.get());
 }
 
-void GameScene::Update() {}
+void GameScene::Update() { 
+	chain_->Update(speed);
+}
 
 void GameScene::Draw() {
 
@@ -40,6 +56,9 @@ void GameScene::Draw() {
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
+	
+	chain_->Draw(viewProjection_);
+	
 	/// </summary>
 
 	// 3Dオブジェクト描画後処理
