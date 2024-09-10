@@ -167,9 +167,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			titleScene->Draw();
 			break;
 
+		case SceneType::kSelect:
+			// タイトルシーンの描画
+			selectScene->Draw();
+			break;
+
 		case SceneType::kGamePlay:
 			// ゲームシーンの描画
 			gameScene->Draw();
+			break;
+
+		case SceneType::kResult:
+			// タイトルシーンの描画
+			resultScene->Draw();
 			break;
 		}
 
