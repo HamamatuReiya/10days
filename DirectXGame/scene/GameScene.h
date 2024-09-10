@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "Chain.h"
 #include "Scene.h"
 
 /// <summary>
@@ -59,7 +60,10 @@ private: // メンバ変数
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
 
+	float speed;
 
+	std::unique_ptr<Model> modelChain_;
+	std::unique_ptr<Chain> chain_;
 
 	/// <summary>
 	/// ゲームシーン用
