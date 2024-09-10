@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Audio.h"
 #include "DirectXCommon.h"
 #include "Input.h"
@@ -9,20 +8,8 @@
 #include "WorldTransform.h"
 #include "Scene.h"
 
-#include "fade/Fade.h"
-#include <Stage.h>
-
-class SelectScene {
+class ResultScene {
 public:
-	/// <summary>
-	/// コンストクラタ
-	/// </summary>
-	SelectScene();
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~SelectScene();
 
 	/// <summary>
 	/// 初期化
@@ -42,21 +29,13 @@ public:
 public:
 	void SceneReset();
 
-	// 島
-	bool IsSceneEnd() { return isSceneEnd_; }
-	SceneType NextScene() { return SceneType::kGamePlay; }
+	bool isSceneEnd_ = false;
 
-private: // メンバ変数
+	bool IsSceneEnd() { return isSceneEnd_; }
+	SceneType NextScene() { return SceneType::kTitle; }
+
+private:
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
-
-	// シーンを終わらせる変数
-	bool isSceneEnd_ = false;
-
-	// フェード
-	std::unique_ptr<Fade> fade_;
-	bool fadeTimerFlag_ = false;
-	const float kFadeTimer_ = 1.657f * 60.0f;
-	float fadeTimer_ = kFadeTimer_;
 };

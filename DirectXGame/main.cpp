@@ -9,6 +9,8 @@
 #include "Scene.h"
 
 #include "TitleScene.h"
+#include "SelectScene.h"
+#include "ResultScene.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -19,9 +21,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Audio* audio = nullptr;
 	AxisIndicator* axisIndicator = nullptr;
 	PrimitiveDrawer* primitiveDrawer = nullptr;
-	GameScene* gameScene = nullptr;
-
 	TitleScene* titleScene = nullptr;
+	SelectScene* selectScene = nullptr;
+	GameScene* gameScene = nullptr;
+	ResultScene* resultScene = nullptr;
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
@@ -66,9 +69,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	titleScene = new TitleScene();
 	titleScene->Initialize();
 
+	// セレクトシーンの初期化
+	selectScene = new SelectScene();
+	selectScene->Initialize();
+
 	// ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize();
+
+	// リザルトシーンの初期化
+	resultScene = new ResultScene();
+	resultScene->Initialize();
 
 	// 最初のシーン
 	SceneType sceneNo = SceneType::kTitle;
@@ -99,6 +110,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 
+		case SceneType::kSelect:
+			// ゲームシーンの毎フレーム処理
+			selectScene->Update();
+
+			if (selectScene->IsSceneEnd()) {
+				// 次のシーンの値を代入してシーン切り替え
+				sceneNo = selectScene->NextScene();
+
+				// ゲームシーンの初期化、フラグリセット等
+				selectScene->SceneReset();
+			}
+
+			break;
+
 		case SceneType::kGamePlay:
 			// ゲームシーンの毎フレーム処理
 			gameScene->Update();
@@ -109,6 +134,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 				// ゲームシーンの初期化、フラグリセット等
 				gameScene->SceneReset();
+			}
+
+			break;
+
+		case SceneType::kResult:
+			// ゲームシーンの毎フレーム処理
+			resultScene->Update();
+
+			if (resultScene->IsSceneEnd()) {
+				// 次のシーンの値を代入してシーン切り替え
+				sceneNo = resultScene->NextScene();
+
+				// ゲームシーンの初期化、フラグリセット等
+				resultScene->SceneReset();
 			}
 
 			break;
