@@ -30,8 +30,9 @@ void Timer::Initialize() {
 	textureColon = Sprite::Create(colonHandle_, {1100.0f, 10.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
 
-void Timer::Update(int frameCount) { 
-	//frameCount = frameCount / 60; 
+void Timer::Update() { 
+	frameCount++;
+
 	int frame = frameCount / 60;
 	int minutes = frame / 60;
 	int seconds = frame % 60;
@@ -62,4 +63,8 @@ void Timer::Draw() {
 		textureTimerMinutes_[i]->Draw();
 	}
 	textureColon->Draw();
+}
+
+void Timer::Reset() { 
+	frameCount = 0;
 }

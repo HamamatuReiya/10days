@@ -35,8 +35,7 @@ void GameScene::Update() {
 	chain_->Update(speed);
 
 	// 時間更新
-	frameCount++;
-	timer_->Update(frameCount);
+	timer_->Update();
 }
 
 void GameScene::Draw() {
@@ -90,4 +89,6 @@ void GameScene::Draw() {
 #pragma endregion
 }
 
-void GameScene::SceneReset() {}
+void GameScene::SceneReset() { 
+	timer_->Reset(); 
+}

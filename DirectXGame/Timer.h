@@ -11,18 +11,26 @@ public:
 	/// <summary>
 	/// 毎フレーム処理
 	/// </summary>
-	void Update(int frameCount);
+	void Update();
 
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// リセット
+	/// </summary>
+	void Reset();
+
 private:
 	// 数字の画像の読み込み
 	uint32_t numHandle_[10];
 	//:画像
 	uint32_t colonHandle_;
+
+	//フレームカウント
+	int frameCount = 0;
 
 	// 数字の画像
 	//秒

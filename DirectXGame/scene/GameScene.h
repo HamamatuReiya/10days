@@ -69,8 +69,6 @@ private: // メンバ変数
 
 	// 時間
 	std::unique_ptr<Timer> timer_;
-	const int kFrameCount = 0;
-	int frameCount = kFrameCount;
 
 	/// <summary>
 	/// ゲームシーン用
