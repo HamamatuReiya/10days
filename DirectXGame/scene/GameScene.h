@@ -8,6 +8,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "Chain.h"
+#include "Spike.h"
 
 /// <summary>
 /// ゲームシーン
@@ -54,6 +55,10 @@ private: // メンバ変数
 
 	std::unique_ptr<Model> modelChain_;
 	std::unique_ptr<Chain> chain_;
+
+	std::unique_ptr<Model> modelSpike1_;
+	std::unique_ptr<Model> modelSpike2_;
+	std::unique_ptr<Spike> spike_;
 
 	/// <summary>
 	/// ゲームシーン用

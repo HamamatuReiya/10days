@@ -20,15 +20,23 @@ void GameScene::Initialize() {
 	speed = 0.2f;
 
 	chain_ = std::make_unique<Chain>();
-
-	// 3Dモデルの生成
 	modelChain_.reset(Model::CreateFromOBJ("Chain", true));
-	// 天球の初期化
 	chain_->Initialize(modelChain_.get());
+
+	spike_ = std::make_unique<Spike>();
+	modelSpike1_.reset(Model::CreateFromOBJ("Spike01", true));
+	modelSpike2_.reset(Model::CreateFromOBJ("Spike02", true));
+	spike_->Initialize(modelSpike1_.get(), modelSpike2_.get());
+	
 }
 
 void GameScene::Update() { 
+	speed += 0.0005f;
+	if (speed > 1.0f) {
+		speed = 1.0f;
+	}
 	chain_->Update(speed);
+	spike_->Update(speed);
 }
 
 void GameScene::Draw() {
@@ -58,6 +66,7 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	
 	chain_->Draw(viewProjection_);
+	spike_->Draw(viewProjection_);
 	
 	/// </summary>
 
