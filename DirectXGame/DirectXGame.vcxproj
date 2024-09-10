@@ -115,6 +115,7 @@
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WorldTransformEx.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
