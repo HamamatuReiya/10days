@@ -57,6 +57,13 @@ void GameScene::Initialize() {
 	timer_ = std::make_unique<Timer>();
 	timer_->Initialize();
 
+	// フェードの生成
+	fade_ = std::make_unique<Fade>();
+	// フェードの初期化
+	fade_->Initialize();
+	// フェードインの開始
+	fade_->FadeInStart();
+
 	// BGM
 	gameBGMHandle_ = audio_->LoadWave("BGM/gameplay.mp3");
 
@@ -66,6 +73,8 @@ void GameScene::Initialize() {
 
 	damageHandle_ = audio_->LoadWave("SE/damage.mp3");
 	isHit = false;
+
+	speedUPHandle_ = audio_->LoadWave("SE/SpeedUP.mp3");
 
 	// 画像の表示時間
 	speedUPTextureTimer = 120.0f;
@@ -156,11 +165,21 @@ void GameScene::Update() {
 		if (gameOverFlag == false) {
 			isSceneEnd_ = true;
 		} 
-		else {
-			isSceneEnd2_ = true;
-		}
 	}
 #endif // DEBUG
+
+	if (input_->TriggerKey(DIK_SPACE) && gameOverFlag == true) {
+		// フェードアウトスタート
+		fadeTimerFlag_ = true;
+		fade_->FadeOutStart();
+	}
+	// フェード開始
+	if (fadeTimerFlag_ == true) {
+		fadeTimer_--;
+	}
+	if (fadeTimer_ <= 0) {
+		isSceneEnd2_ = true;
+	}
 
 	//体力の表示の処理
 	for (int i = 0; i < player_->GetLife(); i++) {
@@ -189,6 +208,8 @@ void GameScene::Update() {
 
 	// 背景更新
 	backGround_->Update();
+	// フェードの更新
+	fade_->Update();
 }
 
 void GameScene::Draw() {
@@ -266,6 +287,9 @@ void GameScene::Draw() {
 		textureGameOver_->Draw();
 	}
 
+	// フェードの描画
+	fade_->Draw();
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 
@@ -287,6 +311,10 @@ void GameScene::SceneReset() {
 	speedDownTextureTimer = 120.0f;
 	isSpeedUP = false;
 	isSpeedDown = false;
+
+	fade_->FadeReset();
+	fadeTimerFlag_ = false;
+	fadeTimer_ = kFadeTimer_;
 
 	 gameOverFlag = false;
 	 grazeFlag = false;
@@ -386,6 +414,15 @@ void GameScene::ChackAllCollisions() {
 	}
 
 	if (playerPos.y <= goalPos.y+10.0f) {
+		//フェードアウトスタート
+		fadeTimerFlag_ = true;
+		fade_->FadeOutStart();
+	}
+	//フェード開始
+	if (fadeTimerFlag_ == true) {
+		fadeTimer_--;
+	}
+	if (fadeTimer_ <= 0) {
 		isSceneEnd_ = true;
 	}
 
@@ -403,6 +440,7 @@ void GameScene::ChackAllCollisions() {
 			if (player_->GetGrazeFlag() == true) {
 				grazeFlag = true;
 				speed += 0.04f;
+				//isSpeedUP_ = audio_->PlayWave(speedUPHandle_, false, 0.5);
 				isSpeedUP = true;
 			}
 		}

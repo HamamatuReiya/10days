@@ -63,6 +63,10 @@ private: // メンバ変数
 	// タイトル画像
 	Sprite* textureTitle_;
 	uint32_t titleHandle_;
+	//スペースボタンを押す
+	Sprite* texturePushSpace_;
+
+	int textureTime = 0;
 
 	// 3Dモデル
 	std::unique_ptr<Model> backGroundModel_ = nullptr;

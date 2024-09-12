@@ -16,6 +16,7 @@
 
 #include <Stage.h>
 #include "BackGround.h"
+#include "fade/Fade.h"
 
 /// <summary>
 /// ゲームシーン
@@ -155,6 +156,16 @@ private: // メンバ変数
 	uint32_t playDamage_;
 	bool isDamage_;
 	bool isHit;
+
+	uint32_t speedUPHandle_;
+	uint32_t playSpeedUP_;
+	bool isSpeedUP_;
+
+	// フェード
+	std::unique_ptr<Fade> fade_;
+	bool fadeTimerFlag_;
+	const float kFadeTimer_ = 1.657f * 60.0f;
+	float fadeTimer_ = kFadeTimer_;
 
 	/// <summary>
 	/// ゲームシーン用
