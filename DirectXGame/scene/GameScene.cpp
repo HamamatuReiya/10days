@@ -183,6 +183,8 @@ void GameScene::Update() {
 
 	// 背景更新
 	backGround_->Update();
+	// フェードの更新
+	fade_->Update();
 }
 
 void GameScene::Draw() {
@@ -259,6 +261,9 @@ void GameScene::Draw() {
 	if (gameOverFlag == true) {
 		textureGameOver_->Draw();
 	}
+
+	// フェードの描画
+	fade_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
