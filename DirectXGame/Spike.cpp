@@ -355,6 +355,7 @@ void Spike::Reset() {
 	collisionFlag = false;
 	collisionCount = 0;
 
+	stage2Flag = false;
 	stage3Flag = false;
 	popObjCount = 0;
 

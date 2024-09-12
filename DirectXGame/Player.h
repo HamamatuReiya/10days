@@ -24,6 +24,10 @@ public:
 
 	bool GetWindFlag() { return windFlag; }
 
+	int GetWindPattern() { return windPattern; }
+
+	void Reset();
+
 private:
 	WorldTransform worldTransform_;
 

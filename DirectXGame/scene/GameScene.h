@@ -12,6 +12,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Timer.h"
+#include "Reaf.h"
 
 /// <summary>
 /// ゲームシーン
@@ -80,6 +81,9 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelSpike4_;
 	std::unique_ptr<Model> modelGoalObj_;
 	std::unique_ptr<Spike> spike_;
+
+	std::unique_ptr<Model> modelReaf_;
+	std::unique_ptr<Reaf> reaf_;
 
 	Vector3 spikePos[22];
 	float hit[22];

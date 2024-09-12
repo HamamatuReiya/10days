@@ -9,6 +9,7 @@ public:
 
 	void Draw(ViewProjection& viewProjection);
 
+	void Reset();
 
 private:
 

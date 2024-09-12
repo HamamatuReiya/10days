@@ -71,8 +71,6 @@ void Player::Update() {
 		}
 	}
 
-	
-
 	worldTransform_.UpdateMatrix();
 }
 

@@ -39,6 +39,10 @@ void GameScene::Initialize() {
 	modelPlayer_[4].reset(Model::CreateFromOBJ("Player05", true));
 	player_->Initialize(modelPlayer_[0].get(), modelPlayer_[1].get(), modelPlayer_[2].get(), modelPlayer_[3].get(), modelPlayer_[4].get());
 
+	reaf_=std::make_unique<Reaf>();
+	modelReaf_.reset(Model::CreateFromOBJ("Leaf", true));
+	reaf_->Initialize(modelReaf_.get());
+
 	// 時間
 	timer_ = std::make_unique<Timer>();
 	timer_->Initialize();
@@ -75,8 +79,30 @@ void GameScene::Update() {
 
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
+
+		//ステージ１の関数
+		spike_->Update(speed);
+
+		//ステージ2の関数
+		/*if (player_->GetWindFlag() == true) {
+			if (player_->GetWindPattern() == 0) {
+				reaf_->SetRightFlag(true);
+				
+			} else if (player_->GetWindPattern() == 1) {
+				reaf_->SetLeftFlag(true);
+			}
+			reaf_->Update();
+		} else {
+			reaf_->SetLeftFlag(false);
+			reaf_->SetRightFlag(false);
+		}
+		reaf_->UpdateMat();
 		spike_->Update2(speed);
-		player_->Wind();
+		player_->Wind();*/
+
+		// ステージ3の関数
+		//spike_->Update3(speed);
+
 		player_->Update();
 		if (spike_->GetCollisionFlag() == true) {
 			ChackAllCollisions();
@@ -117,6 +143,10 @@ void GameScene::Draw() {
 		player_->Draw(viewProjection_);
 	}
 	spike_->Draw(viewProjection_);
+
+	if (spike_->GetStage2Flag() == true) {
+		reaf_->Draw(viewProjection_);
+	}
 	
 	/// </summary>
 

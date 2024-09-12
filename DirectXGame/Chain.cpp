@@ -86,4 +86,41 @@ void Chain::Draw(ViewProjection& viewProjection) {
 		model_->Draw(worldTransformRightChain1_[i], viewProjection);
 		model_->Draw(worldTransformRightChain2_[i], viewProjection);
 	}
+}
+
+void Chain::Reset() {
+	worldTransformStart_[0].Initialize();
+	worldTransformStart_[1].Initialize();
+
+	for (int i = 0; i < chainNumber_; i++) {
+		worldTransformChain1_[i].Initialize();
+		worldTransformChain1_[i].scale_ = {1.0f, 1.0f, 1.0f};
+		worldTransformChain1_[i].rotation_ = {0.0f, 0.0f, 0.0f};
+		worldTransformChain1_[i].translation_ = {0.0f, 0.0f, 0.0f};
+
+		worldTransformChain2_[i].Initialize();
+		worldTransformChain2_[i].scale_ = {1.0f, 1.0f, 1.0f};
+		worldTransformChain2_[i].rotation_ = {0.0f, 0.0f, 0.0f};
+		worldTransformChain2_[i].translation_ = {0.0f, 0.0f, 0.0f};
+
+		worldTransformLeftChain1_[i].Initialize();
+		worldTransformLeftChain1_[i].scale_ = {1.0f, 1.0f, 1.0f};
+		worldTransformLeftChain1_[i].rotation_ = {0.0f, 0.0f, 0.0f};
+		worldTransformLeftChain1_[i].translation_ = {0.0f, 0.0f, 0.0f};
+
+		worldTransformLeftChain2_[i].Initialize();
+		worldTransformLeftChain2_[i].scale_ = {1.0f, 1.0f, 1.0f};
+		worldTransformLeftChain2_[i].rotation_ = {0.0f, 0.0f, 0.0f};
+		worldTransformLeftChain2_[i].translation_ = {0.0f, 0.0f, 0.0f};
+
+		worldTransformRightChain1_[i].Initialize();
+		worldTransformRightChain1_[i].scale_ = {1.0f, 1.0f, 1.0f};
+		worldTransformRightChain1_[i].rotation_ = {0.0f, 0.0f, 0.0f};
+		worldTransformRightChain1_[i].translation_ = {0.0f, 0.0f, 0.0f};
+
+		worldTransformRightChain2_[i].Initialize();
+		worldTransformRightChain2_[i].scale_ = {1.0f, 1.0f, 1.0f};
+		worldTransformRightChain2_[i].rotation_ = {0.0f, 0.0f, 0.0f};
+		worldTransformRightChain2_[i].translation_ = {0.0f, 0.0f, 0.0f};
 	}
+}
