@@ -55,7 +55,7 @@ void GameScene::Update() {
 	}
 	// SE
 	if (isSound == false) {
-		playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
+		//playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
 		isSound = true;
 	}
 
@@ -69,7 +69,7 @@ void GameScene::Update() {
 #endif // DEBUG
 	
 
-}
+
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
 		spike_->Update(speed);
@@ -141,16 +141,16 @@ void GameScene::SceneReset() {
 	timer_->Reset(); 
 	speed = 0.2f;
 	isSceneEnd_ = false;
-	audio_->StopWave(playChain_);
+	//audio_->StopWave(playChain_);
 	isSound = false;
 }
 
 void GameScene::BGMReset() { 
-	playGameBGM_ = audio_->PlayWave(gameBGMHandle_, true, 0.5);
+	//playGameBGM_ = audio_->PlayWave(gameBGMHandle_, true, 0.5);
 }
 
 void GameScene::BGMStop() { 
-	audio_->StopWave(playGameBGM_);
+	//audio_->StopWave(playGameBGM_);
 }
 
 void GameScene::ChackAllCollisions() { 
