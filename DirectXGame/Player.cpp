@@ -96,3 +96,62 @@ Vector3 Player::GetWorldPosition() {
 
 void Player::Oncollision() { life -= 1; }
 
+void Player::Wind() { 
+	windCount++; 
+	if (windPattern >= 2) {
+		windPattern = 0;
+	}
+		if (windCount >= 1500) {
+		windFlag = true;
+		windTime++;
+		if (windPattern == 0) {
+			if (leftMoveFlag == false && rightMoveFlag == false) {
+				if (input_->TriggerKey(DIK_LEFT)) {
+					widthSpeed = 0.5f;
+				}
+				if (input_->TriggerKey(DIK_RIGHT)) {
+					widthSpeed = 1.6f;
+				}
+			}
+		} else {
+			if (leftMoveFlag == false && rightMoveFlag == false) {
+				if (input_->TriggerKey(DIK_LEFT)) {
+					widthSpeed = 1.5f;
+				}
+				if (input_->TriggerKey(DIK_RIGHT)) {
+					widthSpeed = 0.6f;
+				}
+			}
+		}
+		if (windTime >= 600) {
+			windCount = 0;
+			windTime = 0;
+			windFlag = false;
+			widthSpeed = 1.0f;
+			windPattern += 1;
+		}
+	}
+}
+
+void Player::Reset() {
+	worldTransform_.Initialize();
+	worldTransform_.scale_ = {2.0f, 2.0f, 2.0f};
+	worldTransform_.rotation_ = {0.0f, 1.6f, 0.3f};
+	worldTransform_.translation_ = {0.0f, 8.0f, -2.5f};
+	widthSpeed = 1.0f;
+	life = 3;
+	 startFlag = false;
+	 leftMoveFlag = false;
+	 rightMoveFlag = false;
+	 senterStopFlag = true;
+	 GrazeFlag = false;
+
+	windCount = 0;
+	windFlag = false;
+	windTime = 0;
+	windPattern = 0;
+
+	count = 0;
+	widthSpeed;
+}
+

@@ -20,6 +20,10 @@ public:
 
 	int GetLife() { return life; }
 
+	void Wind();
+
+	bool GetWindFlag() { return windFlag; }
+
 private:
 	WorldTransform worldTransform_;
 
@@ -32,6 +36,11 @@ private:
 	bool rightMoveFlag = false;
 	bool senterStopFlag = true;
 	bool GrazeFlag = false;
+
+	int windCount = 0;
+	bool windFlag = false;
+	int windTime = 0;
+	int windPattern = 0;
 
 	int count = 0;
 	float widthSpeed;

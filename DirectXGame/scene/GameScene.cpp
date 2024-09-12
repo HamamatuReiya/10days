@@ -75,7 +75,8 @@ void GameScene::Update() {
 
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
-		spike_->Update3(speed);
+		spike_->Update2(speed);
+		player_->Wind();
 		player_->Update();
 		if (spike_->GetCollisionFlag() == true) {
 			ChackAllCollisions();

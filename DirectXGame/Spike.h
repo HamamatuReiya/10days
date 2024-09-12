@@ -16,6 +16,10 @@ public:
 
 	void Draw(ViewProjection& viewProjection);
 
+	bool GetStage2Flag() { return stage2Flag; }
+
+	void Reset();
+
 	Vector3 GetWorldPosition1();
 	Vector3 GetWorldPosition2();
 	Vector3 GetWorldPosition3();
@@ -68,6 +72,7 @@ private:
 
 	int randNumber3[2] = {0};
 
+	bool stage2Flag = false;
 	bool stage3Flag = false;
 
 	int collisionCount;

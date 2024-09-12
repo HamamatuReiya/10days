@@ -32,7 +32,7 @@ void Spike::Initialize(Model* model, Model* model2, Model* model3, Model* model4
 
 	collisionFlag = false;
 	collisionCount = 0;
-
+	stage2Flag = false;
 	stage3Flag = false;
 
 	for (int i = 0; i < 7; i++) {
@@ -154,6 +154,7 @@ void Spike::Initialize(Model* model, Model* model2, Model* model3, Model* model4
 }
 
 void Spike::Update(float speed) {
+	stage2Flag = false;
 	stage3Flag = false;
 	if (collisionFlag == false) {
 		collisionCount++;
@@ -202,6 +203,7 @@ void Spike::Update(float speed) {
 }
 
 void Spike::Update2(float speed) {
+	stage2Flag = true;
 	stage3Flag = false;
 	if (collisionFlag == false) {
 		collisionCount++;
@@ -250,6 +252,7 @@ void Spike::Update2(float speed) {
 }
 
 void Spike::Update3(float speed) {
+	stage2Flag = false;
 	stage3Flag = true;
 	if (collisionFlag == false) {
 		collisionCount++;
@@ -325,6 +328,48 @@ void Spike::Draw(ViewProjection& viewProjection) {
 
 
 
+}
+
+void Spike::Reset() { 
+	startFlag = false; 
+	randNumber[0] = {0};
+	randNumber[1] = {1};
+	worldTransformBase_[0].Initialize();
+	worldTransformBase_[1].Initialize();
+	worldTransformBase_[2].Initialize();
+
+	worldTransformBase_[2].translation_ = {0, -250, -4};
+	worldTransformBase_[2].rotation_ = {0, 1.56f, 0};
+	worldTransformBase_[2].scale_ = {3.0, 4.0, 3.0};
+
+	for (int i = 0; i < 5; i++) {
+		worldTransform1_[i].Initialize();
+		worldTransform1_[i].translation_ = {0.0f, 100, -3.0f};
+		worldTransform1_[i].scale_ = {5.0f, 5.0f, 5.0f};
+
+		worldTransform2_[i].Initialize();
+		worldTransform2_[i].translation_ = {0.0f, 100, -3.0f};
+		worldTransform2_[i].scale_ = {5.0f, 5.0f, 5.0f};
+	}
+
+	collisionFlag = false;
+	collisionCount = 0;
+
+	stage3Flag = false;
+	popObjCount = 0;
+
+	for (int i = 0; i < 7; i++) {
+		worldTransform1_3_[i].Initialize();
+		worldTransform1_3_[i].translation_ = {0.0f, 100, -3.0f};
+		worldTransform1_3_[i].scale_ = {5.0f, 5.0f, 5.0f};
+
+		worldTransform2_3_[i].Initialize();
+		worldTransform2_3_[i].translation_ = {0.0f, 100, -3.0f};
+		worldTransform2_3_[i].scale_ = {5.0f, 5.0f, 5.0f};
+	}
+
+	randNumber3[0] = {0};
+	randNumber3[1] = {1};
 }
 
 Vector3 Spike::GetWorldPosition1() {
