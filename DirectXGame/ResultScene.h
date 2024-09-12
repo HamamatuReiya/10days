@@ -46,4 +46,7 @@ private:
 	Sprite* textureGameClear_;
 	int textureDeleteTime = 0;
 
+	// 背景
+	Sprite* textureBackground_;
+
 };

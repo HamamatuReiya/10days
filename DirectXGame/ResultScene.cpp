@@ -29,6 +29,8 @@ void ResultScene::Draw() {
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
 
+	textureBackground_->Draw();
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
@@ -75,5 +77,11 @@ void ResultScene::TextureInitialize() {
 	uint32_t GameClearHandle;
 	GameClearHandle = TextureManager::Load("GameClear.png");
 
-	textureGameClear_ = Sprite::Create(GameClearHandle, {500.0f, 400.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+	textureGameClear_ = Sprite::Create(GameClearHandle, {350.0f, 300.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	//背景
+	uint32_t BackgroundHandle;
+	BackgroundHandle = TextureManager::Load("background.png");
+
+	textureBackground_ = Sprite::Create(BackgroundHandle, {0.0f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
