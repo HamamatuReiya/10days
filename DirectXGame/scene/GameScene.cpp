@@ -75,7 +75,7 @@ void GameScene::Update() {
 
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
-		spike_->Update2(speed);
+		spike_->Update3(speed);
 		player_->Update();
 		if (spike_->GetCollisionFlag() == true) {
 			ChackAllCollisions();
@@ -168,10 +168,22 @@ void GameScene::ChackAllCollisions() {
 	spikePos[7] = spike_->GetWorldPosition8();
 	spikePos[8] = spike_->GetWorldPosition9();
 	spikePos[9] = spike_->GetWorldPosition10();
+	spikePos[10] = spike_->GetWorldPosition11();
+	spikePos[11] = spike_->GetWorldPosition12();
+	spikePos[12] = spike_->GetWorldPosition13();
+	spikePos[13] = spike_->GetWorldPosition14();
+	spikePos[14] = spike_->GetWorldPosition15();
+	spikePos[15] = spike_->GetWorldPosition16();
+	spikePos[16] = spike_->GetWorldPosition17();
+	spikePos[17] = spike_->GetWorldPosition18();
+	spikePos[18] = spike_->GetWorldPosition19();
+	spikePos[19] = spike_->GetWorldPosition20();
+	spikePos[20] = spike_->GetWorldPosition21();
+	spikePos[21] = spike_->GetWorldPosition22();
 
 	Vector3 goalPos = spike_->GetWorldPosition99();
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 22; i++) {
 		hit[i] = (spikePos[i].x - playerPos.x) * (spikePos[i].x - playerPos.x) + (spikePos[i].y - playerPos.y) * (spikePos[i].y - playerPos.y) + (spikePos[i].z - playerPos.z) * (spikePos[i].z - playerPos.z);
 	}
 
@@ -200,7 +212,7 @@ void GameScene::ChackAllCollisions() {
 		isSceneEnd_ = true;
 	}
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 22; i++) {
 		if (hitCoolTimeFlag == false) {
 			if (hit[i] <= radius) {
 				hitCoolTimeFlag = true;

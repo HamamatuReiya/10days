@@ -112,44 +112,44 @@ void Spike::Initialize(Model* model, Model* model2, Model* model3, Model* model4
 
 	//ステージ３
 	worldTransformPattern_3_[0][0].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[0][1].translation_ = {-20.0f, -width, -3.0f};
-	worldTransformPattern_3_[0][2].translation_ = {0.0f, -width * 2, -3.0f};
-	worldTransformPattern_3_[0][3].translation_ = {20.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[0][1].translation_ = {0.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[0][2].translation_ = {0.0f, -width, -3.0f};
+	worldTransformPattern_3_[0][3].translation_ = {0.0f, -width * 3, -3.0f};
 	worldTransformPattern_3_[0][4].translation_ = {0.0f, -width * 4, -3.0f};
-	worldTransformPattern_3_[0][5].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[0][6].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[0][5].translation_ = {-20.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[0][6].translation_ = {20.0f, -width*3, -3.0f};
 
 	worldTransformPattern_3_[1][0].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[1][1].translation_ = {-20.0f, -width, -3.0f};
-	worldTransformPattern_3_[1][2].translation_ = {0.0f, -width * 2, -3.0f};
-	worldTransformPattern_3_[1][3].translation_ = {20.0f, -width * 3, -3.0f};
-	worldTransformPattern_3_[1][4].translation_ = {0.0f, -width * 4, -3.0f};
-	worldTransformPattern_3_[1][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[1][1].translation_ = {20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[1][2].translation_ = {20.0f, -width , -3.0f};
+	worldTransformPattern_3_[1][3].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[1][4].translation_ = {0.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[1][5].translation_ = {20.0f, -width * 3, -3.0f};
 	worldTransformPattern_3_[1][6].translation_ = {-120.0f, -width, -3.0f};
 
 	worldTransformPattern_3_[2][0].translation_ = {-20.0f, 0.0f, -3.0f};
 	worldTransformPattern_3_[2][1].translation_ = {-20.0f, -width, -3.0f};
-	worldTransformPattern_3_[2][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[2][2].translation_ = {0.0f, -width , -3.0f};
 	worldTransformPattern_3_[2][3].translation_ = {20.0f, -width * 3, -3.0f};
 	worldTransformPattern_3_[2][4].translation_ = {0.0f, -width * 4, -3.0f};
-	worldTransformPattern_3_[2][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[2][5].translation_ = {-20.0f, -width * 4, -3.0f};
 	worldTransformPattern_3_[2][6].translation_ = {-120.0f, -width, -3.0f};
 
 	worldTransformPattern_3_[3][0].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[3][1].translation_ = {-20.0f, -width, -3.0f};
-	worldTransformPattern_3_[3][2].translation_ = {0.0f, -width * 2, -3.0f};
-	worldTransformPattern_3_[3][3].translation_ = {20.0f, -width * 3, -3.0f};
-	worldTransformPattern_3_[3][4].translation_ = {0.0f, -width * 4, -3.0f};
-	worldTransformPattern_3_[3][5].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[3][6].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[3][1].translation_ = {0.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[3][2].translation_ = {0.0f, -width, -3.0f};
+	worldTransformPattern_3_[3][3].translation_ = {00.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[3][4].translation_ = {20.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[3][5].translation_ = {-20.0f, -width*3, -3.0f};
+	worldTransformPattern_3_[3][6].translation_ = {20.0f, -width*2, -3.0f};
 
-	worldTransformPattern_3_[4][0].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[4][1].translation_ = {-20.0f, -width, -3.0f};
-	worldTransformPattern_3_[4][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[4][0].translation_ = {0.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[4][1].translation_ = {20.0f, -width, -3.0f};
+	worldTransformPattern_3_[4][2].translation_ = {-20.0f, -width * 2, -3.0f};
 	worldTransformPattern_3_[4][3].translation_ = {20.0f, -width * 3, -3.0f};
 	worldTransformPattern_3_[4][4].translation_ = {0.0f, -width * 4, -3.0f};
-	worldTransformPattern_3_[4][5].translation_ = {-20.0f, 0.0f, -3.0f};
-	worldTransformPattern_3_[4][6].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[4][5].translation_ = {-20.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[4][6].translation_ = {0.0f, -width*2, -3.0f};
 
 }
 
@@ -231,8 +231,8 @@ void Spike::Update2(float speed) {
 	}
 
 	for (int i = 0; i < 5; i++) {
-		worldTransform1_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_[randNumber3[0]][i].translation_);
-		worldTransform2_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_[randNumber3[1]][i].translation_);
+		worldTransform1_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_[randNumber[0]][i].translation_);
+		worldTransform2_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_[randNumber[1]][i].translation_);
 		worldTransform2_[i].translation_.y += -width * 5;
 	}
 	if (startFlag == false) {
@@ -265,13 +265,13 @@ void Spike::Update3(float speed) {
 	if (popObjCount <= 20) {
 		if (worldTransformBase_[0].translation_.y >= width * 6) {
 			worldTransformBase_[0].translation_.y = -width * 4;
-			randNumber3[0] = rand() % 5 + 10;
+			randNumber3[0] = rand() % 5;
 			popObjCount++;
 		}
 
 		if (worldTransformBase_[1].translation_.y >= width * 11) {
 			worldTransformBase_[1].translation_.y = width;
-			randNumber3[1] = rand() % 5 + 10;
+			randNumber3[1] = rand() % 5;
 			popObjCount++;
 		}
 	} else {
@@ -279,8 +279,8 @@ void Spike::Update3(float speed) {
 	}
 
 	for (int i = 0; i < 7; i++) {
-		worldTransform1_3_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_[randNumber[0]][i].translation_);
-		worldTransform2_3_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_[randNumber[1]][i].translation_);
+		worldTransform1_3_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_3_[randNumber3[0]][i].translation_);
+		worldTransform2_3_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_3_[randNumber3[1]][i].translation_);
 		worldTransform2_3_[i].translation_.y += -width * 5;
 	}
 	if (startFlag == false) {
@@ -415,6 +415,146 @@ Vector3 Spike::GetWorldPosition10() {
 	    worldPos.x = worldTransform2_[4].matWorld_.m[3][0];
 	    worldPos.y = worldTransform2_[4].matWorld_.m[3][1];
 	    worldPos.z = worldTransform2_[4].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition11() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[0].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[0].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[0].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition12() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[1].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[1].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[1].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition13() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[2].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[2].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[2].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition14() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[3].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[3].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[3].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition15() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[4].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[4].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[4].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition16() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[5].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[5].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[5].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition17() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[0].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[0].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[0].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition18() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[1].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[1].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[1].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition19() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[2].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[2].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[2].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition20() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[3].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[3].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[3].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition21() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[4].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[4].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[4].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition22() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[5].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[5].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[5].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition23() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_3_[6].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_3_[6].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_3_[6].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition24() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform2_3_[6].matWorld_.m[3][0];
+	    worldPos.y = worldTransform2_3_[6].matWorld_.m[3][1];
+	    worldPos.z = worldTransform2_3_[6].matWorld_.m[3][2];
 
 	    return worldPos;
 }

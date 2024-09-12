@@ -77,11 +77,12 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelSpike1_;
 	std::unique_ptr<Model> modelSpike2_;
 	std::unique_ptr<Model> modelSpike3_;
+	std::unique_ptr<Model> modelSpike4_;
 	std::unique_ptr<Model> modelGoalObj_;
 	std::unique_ptr<Spike> spike_;
 
-	Vector3 spikePos[10];
-	float hit[10];
+	Vector3 spikePos[22];
+	float hit[22];
 	float playerRadius = 2.0f;
 	float spikeRadius = 5.0f;
 	float spikeCollisionRadius = 9.0f;

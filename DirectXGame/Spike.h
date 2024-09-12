@@ -32,6 +32,15 @@ public:
 	Vector3 GetWorldPosition14();
 	Vector3 GetWorldPosition15();
 	Vector3 GetWorldPosition16();
+	Vector3 GetWorldPosition17();
+	Vector3 GetWorldPosition18();
+	Vector3 GetWorldPosition19();
+	Vector3 GetWorldPosition20();
+	Vector3 GetWorldPosition21();
+	Vector3 GetWorldPosition22();
+
+	Vector3 GetWorldPosition23();
+	Vector3 GetWorldPosition24();
 
 	Vector3 GetWorldPosition99();
 
