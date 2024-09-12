@@ -34,18 +34,18 @@ void TitleScene::Initialize() {
 	backGround_->Initialize(backGroundModel_.get());
 
 	// BGM
-	//titleBGMHandle_ = audio_->LoadWave("BGM/title.mp3");
-	//playTitleBGM_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
+	titleBGMHandle_ = audio_->LoadWave("BGM/title.mp3");
+	playTitleBGM_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
 
 	// SE
-	//systemHandle_ = audio_->LoadWave("SE/system.mp3");
+	systemHandle_ = audio_->LoadWave("SE/system.mp3");
 	isClick = false;
 }
 
 void TitleScene::Update() {
 	// SE
 	if (isClick == true) {
-		//playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);
+		playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);
 		isClick = false;
 	}
 
@@ -140,9 +140,9 @@ void TitleScene::SceneReset() {
 }
 
 void TitleScene::BGMReset() { 
-	//playTitleBGM_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
+	playTitleBGM_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
 }
 
 void TitleScene::BGMStop() {
-	//audio_->StopWave(playTitleBGM_);
+	audio_->StopWave(playTitleBGM_);
 }

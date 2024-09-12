@@ -8,6 +8,11 @@ void ResultScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	// 画像の初期化
 	TextureInitialize();
+
+	// SE
+	gameClearHandle_ = audio_->LoadWave("SE/clear.mp3");
+	isClear = true;
+
 }
 
 void ResultScene::Update() {
@@ -15,6 +20,13 @@ void ResultScene::Update() {
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneEnd_ = true;
 	}
+
+	// SE
+	if (isClear == true) {
+		isGameClear_ = audio_->PlayWave(gameClearHandle_, false, 0.5);
+		isClear = false;
+	}
+
 }
 
 void ResultScene::Draw() {
@@ -70,6 +82,7 @@ void ResultScene::Draw() {
 void ResultScene::SceneReset() { 
 	isSceneEnd_ = false; 
 	textureDeleteTime = 0;
+	isClear = true;
 }
 
 void ResultScene::TextureInitialize() {

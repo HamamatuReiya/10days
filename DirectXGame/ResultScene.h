@@ -49,4 +49,10 @@ private:
 	// 背景
 	Sprite* textureBackground_;
 
+	// SE
+	uint32_t gameClearHandle_;
+	uint32_t playGameClear_;
+	bool isGameClear_;
+	bool isClear;
+
 };

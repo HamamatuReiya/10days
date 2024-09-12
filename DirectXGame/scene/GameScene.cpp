@@ -76,6 +76,9 @@ void GameScene::Initialize() {
 
 	speedUPHandle_ = audio_->LoadWave("SE/SpeedUP.mp3");
 
+	windHandle_ = audio_->LoadWave("SE/wind.mp3");
+	isWind = false;
+
 	// 画像の表示時間
 	speedUPTextureTimer = 120.0f;
 	speedDownTextureTimer = 120.0f;
@@ -117,6 +120,7 @@ void GameScene::Update() {
 				}
 				reaf_->Update();
 			} else {
+				audio_->StopWave(playWind_);
 				reaf_->SetLeftFlag(false);
 				reaf_->SetRightFlag(false);
 			}
@@ -149,15 +153,19 @@ void GameScene::Update() {
 	}
 	// SE
 	if (isSound == false) {
-		//playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
+		playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
 		isSound = true;
 	}
 
 	if (isHit == true) {
-		//isDamage_ = audio_->PlayWave(damageHandle_, false, 1.0);
+		isDamage_ = audio_->PlayWave(damageHandle_, false, 1.0);
 		isHit = false;
 	}
-	
+
+	if (isWind == true) {
+		isWind_ = audio_->PlayWave(windHandle_, false, 0.5);
+		isWind = false;
+	}
 
 	// シーン移動
 #ifdef _DEBUG
@@ -305,7 +313,8 @@ void GameScene::SceneReset() {
 	speed = 0.2f;
 	isSceneEnd_ = false;
 	isSceneEnd2_ = false;
-	//audio_->StopWave(playChain_);
+	audio_->StopWave(isWind_);
+	audio_->StopWave(playChain_);
 	isSound = false;
 	speedUPTextureTimer = 120.0f;
 	speedDownTextureTimer = 120.0f;
@@ -327,11 +336,11 @@ void GameScene::SceneReset() {
 }
 
 void GameScene::BGMReset() { 
-	//playGameBGM_ = audio_->PlayWave(gameBGMHandle_, true, 0.5);
+	playGameBGM_ = audio_->PlayWave(gameBGMHandle_, true, 0.5);
 }
 
 void GameScene::BGMStop() { 
-	//audio_->StopWave(playGameBGM_);
+	audio_->StopWave(playGameBGM_);
 }
 
 void GameScene::TextureInitialize() {
@@ -440,7 +449,7 @@ void GameScene::ChackAllCollisions() {
 			if (player_->GetGrazeFlag() == true) {
 				grazeFlag = true;
 				speed += 0.04f;
-				//isSpeedUP_ = audio_->PlayWave(speedUPHandle_, false, 0.5);
+				isSpeedUP_ = audio_->PlayWave(speedUPHandle_, false, 0.5);
 				isSpeedUP = true;
 			}
 		}

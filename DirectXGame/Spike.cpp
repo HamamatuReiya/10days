@@ -167,7 +167,7 @@ void Spike::Update(float speed) {
 	worldTransformBase_[0].translation_.y += speed;
 	worldTransformBase_[1].translation_.y += speed;
 
-	if (popObjCount <= 2) {
+	if (popObjCount <= 20) {
 		if (worldTransformBase_[0].translation_.y >= width * 6) {
 			worldTransformBase_[0].translation_.y = -width * 4;
 			randNumber[0] = rand() % 5;

@@ -161,6 +161,11 @@ private: // メンバ変数
 	uint32_t playSpeedUP_;
 	bool isSpeedUP_;
 
+	uint32_t windHandle_;
+	uint32_t playWind_;
+	bool isWind_;
+	bool isWind;
+
 	// フェード
 	std::unique_ptr<Fade> fade_;
 	bool fadeTimerFlag_;
