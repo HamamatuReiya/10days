@@ -74,6 +74,8 @@ void GameScene::Initialize() {
 	damageHandle_ = audio_->LoadWave("SE/damage.mp3");
 	isHit = false;
 
+	speedUPHandle_ = audio_->LoadWave("SE/SpeedUP.mp3");
+
 	// 画像の表示時間
 	speedUPTextureTimer = 120.0f;
 	speedDownTextureTimer = 120.0f;
@@ -395,6 +397,7 @@ void GameScene::ChackAllCollisions() {
 			if (player_->GetGrazeFlag() == true) {
 				grazeFlag = true;
 				speed += 0.04f;
+				//isSpeedUP_ = audio_->PlayWave(speedUPHandle_, false, 0.5);
 				isSpeedUP = true;
 			}
 		}
