@@ -122,6 +122,15 @@ void GameScene::Update() {
 #endif // DEBUG
 
 	if (input_->TriggerKey(DIK_SPACE) && gameOverFlag == true) {
+		// フェードアウトスタート
+		fadeTimerFlag_ = true;
+		fade_->FadeOutStart();
+	}
+	// フェード開始
+	if (fadeTimerFlag_ == true) {
+		fadeTimer_--;
+	}
+	if (fadeTimer_ <= 0) {
 		isSceneEnd2_ = true;
 	}
 
