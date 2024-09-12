@@ -92,6 +92,9 @@ void Chain::Reset() {
 	worldTransformStart_[0].Initialize();
 	worldTransformStart_[1].Initialize();
 
+	worldTransformStart_[0].translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransformStart_[1].translation_ = {0.0f, 0.0f, 0.0f};
+
 	for (int i = 0; i < chainNumber_; i++) {
 		worldTransformChain1_[i].Initialize();
 		worldTransformChain1_[i].scale_ = {1.0f, 1.0f, 1.0f};
@@ -122,5 +125,7 @@ void Chain::Reset() {
 		worldTransformRightChain2_[i].scale_ = {1.0f, 1.0f, 1.0f};
 		worldTransformRightChain2_[i].rotation_ = {0.0f, 0.0f, 0.0f};
 		worldTransformRightChain2_[i].translation_ = {0.0f, 0.0f, 0.0f};
+
 	}
+
 }

@@ -150,6 +150,5 @@ void Player::Reset() {
 	windPattern = 0;
 
 	count = 0;
-	widthSpeed;
 }
 

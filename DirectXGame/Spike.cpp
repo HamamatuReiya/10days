@@ -338,6 +338,9 @@ void Spike::Reset() {
 	worldTransformBase_[1].Initialize();
 	worldTransformBase_[2].Initialize();
 
+	worldTransformBase_[0].translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransformBase_[1].translation_ = {0.0f, 0.0f, 0.0f};
+
 	worldTransformBase_[2].translation_ = {0, -250, -4};
 	worldTransformBase_[2].rotation_ = {0, 1.56f, 0};
 	worldTransformBase_[2].scale_ = {3.0, 4.0, 3.0};

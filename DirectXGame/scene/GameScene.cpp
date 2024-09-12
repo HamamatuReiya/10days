@@ -75,13 +75,60 @@ void GameScene::Initialize() {
 void GameScene::Update() { 
 	switch (stageNo) {
 	case Stage::kStage1:
+		if (gameOverFlag == false) {
+			chain_->Update(speed);
 
+			player_->Update();
+			if (spike_->GetCollisionFlag() == true) {
+				ChackAllCollisions();
+			}
+			// 時間更新
+			timer_->Update();
+			// ステージ１の関数
+			spike_->Update(speed);
+		}
 		break;
 	case Stage::kStage2:
+		if (gameOverFlag == false) {
+			chain_->Update(speed);
+			player_->Wind();
+			player_->Update();
+			if (spike_->GetCollisionFlag() == true) {
+				ChackAllCollisions();
+			}
+			// 時間更新
+			timer_->Update();
+			// ステージ2の関数
+			if (player_->GetWindFlag() == true) {
+				if (player_->GetWindPattern() == 0) {
+					reaf_->SetRightFlag(true);
 
+				} else if (player_->GetWindPattern() == 1) {
+					reaf_->SetLeftFlag(true);
+				}
+				reaf_->Update();
+			} else {
+				reaf_->SetLeftFlag(false);
+				reaf_->SetRightFlag(false);
+			}
+			reaf_->UpdateMat();
+			spike_->Update2(speed);
+			
+		}
 		break;
 	case Stage::kStage3:
+		if (gameOverFlag == false) {
+			chain_->Update(speed);
 
+			player_->Update();
+			if (spike_->GetCollisionFlag() == true) {
+				ChackAllCollisions();
+			}
+			// 時間更新
+			timer_->Update();
+			// ステージ3の関数
+			spike_->Update3(speed);
+		}
 		break;
 	default:
 		break;
@@ -122,39 +169,8 @@ void GameScene::Update() {
 		textureHeart_[i]->SetSize(heartSize_);
 	}
 
-	if (gameOverFlag == false) {
-		chain_->Update(speed);
-
-		//ステージ１の関数
-		spike_->Update(speed);
-
-		//ステージ2の関数
-		/*if (player_->GetWindFlag() == true) {
-			if (player_->GetWindPattern() == 0) {
-				reaf_->SetRightFlag(true);
-				
-			} else if (player_->GetWindPattern() == 1) {
-				reaf_->SetLeftFlag(true);
-			}
-			reaf_->Update();
-		} else {
-			reaf_->SetLeftFlag(false);
-			reaf_->SetRightFlag(false);
-		}
-		reaf_->UpdateMat();
-		spike_->Update2(speed);
-		player_->Wind();*/
-
-		// ステージ3の関数
-		//spike_->Update3(speed);
-
-		player_->Update();
-		if (spike_->GetCollisionFlag() == true) {
-			ChackAllCollisions();
-		}
-		// 時間更新
-		timer_->Update();
-	}
+	
+	
 
 	if (isSpeedUP == true) {
 		speedUPTextureTimer -= 1.0f;
@@ -257,6 +273,10 @@ void GameScene::Draw() {
 }
 
 void GameScene::SceneReset() { 
+	player_->Reset();
+	chain_->Reset();
+	spike_->Reset();
+	reaf_->Reset();
 	timer_->Reset(); 
 	speed = 0.2f;
 	isSceneEnd_ = false;
@@ -267,6 +287,15 @@ void GameScene::SceneReset() {
 	speedDownTextureTimer = 120.0f;
 	isSpeedUP = false;
 	isSpeedDown = false;
+
+	 gameOverFlag = false;
+	 grazeFlag = false;
+
+	 coolTimeDrawFlag = false;
+	coolTimeDrawCount = 0;
+	 hitCoolTimeFlag = false;
+	hitCoolTime = 0;
+
 }
 
 void GameScene::BGMReset() { 
