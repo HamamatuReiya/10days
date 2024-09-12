@@ -27,20 +27,21 @@ void SelectScene::Initialize() {
 void SelectScene::Update() { 
 	
 	//ステージカウントが最大ステージ数いないの時、場面が切り替わっていない時
-	if (stageCount_ >= 0 || stageCount_ <= kMaxStage_ && fadeTimerFlag_ == false) {
-		//ステージ選択
-		if (input_->TriggerKey(DIK_RIGHT)) {
-			stageCount_ += 1;
-		} 
-		else if (input_->TriggerKey(DIK_LEFT)) {
-			stageCount_ -= 1;
-		}
-		//決定
-		if (input_->TriggerKey(DIK_SPACE)) {
-			//フェードを開始するフラグ
-			fadeTimerFlag_ = true;
-			//フェードアウトを始めるフラグ
-			fade_->FadeOutStart();
+	if (stageCount_ >= 0 || stageCount_ <= kMaxStage_) {
+		if (fadeTimerFlag_ == false) {
+			// ステージ選択
+			if (input_->TriggerKey(DIK_RIGHT)) {
+				stageCount_ += 1;
+			} else if (input_->TriggerKey(DIK_LEFT)) {
+				stageCount_ -= 1;
+			}
+			// 決定
+			if (input_->TriggerKey(DIK_SPACE)) {
+				// フェードを開始するフラグ
+				fadeTimerFlag_ = true;
+				// フェードアウトを始めるフラグ
+				fade_->FadeOutStart();
+			}
 		}
 	}
 	//フェードが開始したとき
@@ -98,12 +99,14 @@ void SelectScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
-	textureNumber_[0]->Draw();
+	//textureNumber_[0]->Draw();
 	textureNumber_[1]->Draw();
 	textureNumber_[2]->Draw();
-	//textureNumber_[3]->Draw();
+	textureNumber_[3]->Draw();
 
 	textureCursor_->Draw();
+
+	textureText_->Draw();
 
 	// フェードの描画
 	fade_->Draw();
@@ -133,6 +136,12 @@ void SelectScene::TextureInitialize() {
 	cursorHandle = TextureManager::Load("cursor.png");
 
 	textureCursor_ = Sprite::Create(cursorHandle, {50.0f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	// テキストの画像
+	uint32_t textHandle;
+	textHandle = TextureManager::Load("./Resources/Text.png");
+
+	textureText_ = Sprite::Create(textHandle, {350.0f, 100.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
 
 void SelectScene::StageSelect() {
@@ -144,17 +153,17 @@ void SelectScene::StageSelect() {
 	}
 
 	if (stageCount_ == 0) {
-		cursorPos_.x = 50.0f - 30;
+		cursorPos_.x = 313.0f - 30;
 		stageNo = Stage::kStage1;
 	}
 
 	if (stageCount_ == 1) {
-		cursorPos_.x = 313.0f - 30;
+		cursorPos_.x = 600.0f - 30;
 		stageNo = Stage::kStage2;
 	}
 
 	if (stageCount_ == 2) {
-		cursorPos_.x = 600.0f - 30;
+		cursorPos_.x = 853.0f - 30;
 		stageNo = Stage::kStage3;
 	}
 }
@@ -162,6 +171,7 @@ void SelectScene::StageSelect() {
 void SelectScene::SceneReset() {
 	fade_->FadeReset();
 	isSceneEnd_ = false;
+	stageCount_ = 0;
 	fadeTimerFlag_ = false;
 	fadeTimer_ = kFadeTimer_;
 }

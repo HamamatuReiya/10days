@@ -9,6 +9,7 @@
 #include "Scene.h"
 
 #include "fade/Fade.h"
+#include "BackGround.h"
 
 class TitleScene {
 public:
@@ -43,7 +44,7 @@ public:
 	bool isSceneEnd_ = false;
 
 	bool IsSceneEnd() { return isSceneEnd_; }
-	SceneType NextScene() { return SceneType::kGamePlay; }
+	SceneType NextScene() { return SceneType::kSelect; }
 
 	void BGMReset();
 
@@ -62,6 +63,11 @@ private: // メンバ変数
 	// タイトル画像
 	Sprite* textureTitle_;
 	uint32_t titleHandle_;
+
+	// 3Dモデル
+	std::unique_ptr<Model> backGroundModel_ = nullptr;
+	// 背景
+	std::unique_ptr<BackGround> backGround_;
 
 	// フェード
 	std::unique_ptr<Fade> fade_;

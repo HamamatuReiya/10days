@@ -39,6 +39,16 @@ void GameScene::Initialize() {
 	modelPlayer_[4].reset(Model::CreateFromOBJ("Player05", true));
 	player_->Initialize(modelPlayer_[0].get(), modelPlayer_[1].get(), modelPlayer_[2].get(), modelPlayer_[3].get(), modelPlayer_[4].get());
 
+	// テクスチャの初期化
+	TextureInitialize();
+
+	// 背景の生成
+	backGround_ = std::make_unique<BackGround>();
+	// 3Dモデルの生成
+	backGroundModel_.reset(Model::CreateFromOBJ("background", true));
+	// 背景の初期化
+	backGround_->Initialize(backGroundModel_.get());
+
 	reaf_=std::make_unique<Reaf>();
 	modelReaf_.reset(Model::CreateFromOBJ("Leaf", true));
 	reaf_->Initialize(modelReaf_.get());
@@ -53,9 +63,30 @@ void GameScene::Initialize() {
 	// SE
 	chainHandle_ = audio_->LoadWave("SE/chain.mp3");
 	isSound = false;
+
+	damageHandle_ = audio_->LoadWave("SE/damage.mp3");
+	isHit = false;
+
+	// 画像の表示時間
+	speedUPTextureTimer = 120.0f;
+	speedDownTextureTimer = 120.0f;
 }
 
 void GameScene::Update() { 
+	switch (stageNo) {
+	case Stage::kStage1:
+
+		break;
+	case Stage::kStage2:
+
+		break;
+	case Stage::kStage3:
+
+		break;
+	default:
+		break;
+	}
+
 	//speed += 0.0005f;
 	if (speed > 1.0f) {
 		speed = 1.0f;
@@ -66,16 +97,30 @@ void GameScene::Update() {
 		isSound = true;
 	}
 
+	if (isHit == true) {
+		//isDamage_ = audio_->PlayWave(damageHandle_, false, 1.0);
+		isHit = false;
+	}
 	
 
 	// シーン移動
 #ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
-		isSceneEnd_ = true;
+		if (gameOverFlag == false) {
+			isSceneEnd_ = true;
+		} 
+		else {
+			isSceneEnd2_ = true;
+		}
 	}
 #endif // DEBUG
-	
 
+	//体力の表示の処理
+	for (int i = 0; i < player_->GetLife(); i++) {
+		heartSize_ = textureHeart_[i]->GetSize();
+		heartSize_ = {50.0f, 50.0f};
+		textureHeart_[i]->SetSize(heartSize_);
+	}
 
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
@@ -110,6 +155,24 @@ void GameScene::Update() {
 		// 時間更新
 		timer_->Update();
 	}
+
+	if (isSpeedUP == true) {
+		speedUPTextureTimer -= 1.0f;
+		if (speedUPTextureTimer < 0.0f) {
+			speedUPTextureTimer = 120.0f;
+			isSpeedUP = false;
+		}
+	} 
+	if (isSpeedDown == true) {
+		speedDownTextureTimer -= 1.0f;
+		if (speedDownTextureTimer < 0.0f) {
+			speedDownTextureTimer = 120.0f;
+			isSpeedDown = false;
+		}
+	}
+
+	// 背景更新
+	backGround_->Update();
 }
 
 void GameScene::Draw() {
@@ -137,12 +200,16 @@ void GameScene::Draw() {
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
-	
+	/// </summary>
+
 	chain_->Draw(viewProjection_);
 	if (coolTimeDrawCount <= 5) {
 		player_->Draw(viewProjection_);
 	}
 	spike_->Draw(viewProjection_);
+	
+	// 背景描画
+	backGround_->Draw(viewProjection_);
 
 	if (spike_->GetStage2Flag() == true) {
 		reaf_->Draw(viewProjection_);
@@ -165,6 +232,24 @@ void GameScene::Draw() {
 	//  時間表示
 	timer_->Draw();
 
+	//体力の表示
+	for (int i = 0; i < player_->GetLife(); i++) {
+		textureHeart_[i]->Draw();
+	}
+
+	// スピードアップ
+	if (isSpeedUP == true) {
+		textureSpeedUP_->Draw();
+	}
+	// スピードダウン
+	if (isSpeedDown == true) {
+		textureSpeedDown_->Draw();
+	}
+	// ゲームオーバー
+	if (gameOverFlag == true) {
+		textureGameOver_->Draw();
+	}
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 
@@ -175,8 +260,13 @@ void GameScene::SceneReset() {
 	timer_->Reset(); 
 	speed = 0.2f;
 	isSceneEnd_ = false;
+	isSceneEnd2_ = false;
 	//audio_->StopWave(playChain_);
 	isSound = false;
+	speedUPTextureTimer = 120.0f;
+	speedDownTextureTimer = 120.0f;
+	isSpeedUP = false;
+	isSpeedDown = false;
 }
 
 void GameScene::BGMReset() { 
@@ -185,6 +275,32 @@ void GameScene::BGMReset() {
 
 void GameScene::BGMStop() { 
 	//audio_->StopWave(playGameBGM_);
+}
+
+void GameScene::TextureInitialize() {
+	uint32_t heartHandle[3];
+	for (int i = 0; i < player_->GetLife(); i++) {
+		heartHandle[i] = TextureManager::Load("heart.png");
+		textureHeart_[i] = Sprite::Create(heartHandle[i], {i * 55.0f + 10, 10.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+	}
+
+	// スピードアップの画像
+	uint32_t SpeedUpHandle;
+	SpeedUpHandle = TextureManager::Load("SpeedUP.png");
+
+	textureSpeedUP_ = Sprite::Create(SpeedUpHandle, {500.0f, 50.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	// スピードダウンの画像
+	uint32_t SpeedDownHandle;
+	SpeedDownHandle = TextureManager::Load("SpeedDown.png");
+
+	textureSpeedDown_ = Sprite::Create(SpeedDownHandle, {500.0f, 100.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	// ゲームオーバーの画像
+	uint32_t GameOverHandle;
+	GameOverHandle = TextureManager::Load("GameOver.png");
+
+	textureGameOver_ = Sprite::Create(GameOverHandle, {500.0f, 400.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
 
 void GameScene::ChackAllCollisions() { 
@@ -228,6 +344,7 @@ void GameScene::ChackAllCollisions() {
 			coolTimeDrawCount = 0;
 		}
 		speed = 0.2f;
+		isSpeedDown = true;
 		if (hitCoolTime >= 120) {
 			hitCoolTime = 0;
 			hitCoolTimeFlag = false;
@@ -249,6 +366,7 @@ void GameScene::ChackAllCollisions() {
 				hitCoolTimeFlag = true;
 				coolTimeDrawFlag = true;
 				player_->Oncollision();
+				isHit = true;
 			}
 		}
 
@@ -256,6 +374,7 @@ void GameScene::ChackAllCollisions() {
 			if (player_->GetGrazeFlag() == true) {
 				grazeFlag = true;
 				speed += 0.04f;
+				isSpeedUP = true;
 			}
 		}
 	}

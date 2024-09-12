@@ -14,10 +14,13 @@
 #include "Timer.h"
 #include "Reaf.h"
 
+#include <Stage.h>
+#include "BackGround.h"
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
-class GameScene {
+class GameScene : public StageSelect {
 
 public: // メンバ関数
 	/// <summary>
@@ -56,9 +59,18 @@ public:
 	bool IsSceneEnd() { return isSceneEnd_; }
 	SceneType NextScene() { return SceneType::kResult; }
 
+	bool isSceneEnd2_ = false;
+
+	bool IsSceneEnd2() { return isSceneEnd2_; }
+	SceneType NextScene2() { return SceneType::kTitle; }
+
 	void BGMReset();
 
 	void BGMStop();
+
+private:
+	// 画像の初期化
+	void TextureInitialize();
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -69,6 +81,21 @@ private: // メンバ変数
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
+
+	// スピードアップの画像
+	Sprite* textureSpeedUP_;
+	bool isSpeedUP;
+
+	// スピードダウンの画像
+	Sprite* textureSpeedDown_;
+	bool isSpeedDown;
+
+	// ゲームオーバーの画像
+	Sprite* textureGameOver_;
+
+	// Speed画像の表示時間
+	float speedUPTextureTimer;
+	float speedDownTextureTimer;
 
 	float speed;
 
@@ -101,8 +128,17 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelPlayer_[5];
 	std::unique_ptr<Player> player_;
 
+	// 背景3Dモデル
+	std::unique_ptr<Model> backGroundModel_ = nullptr;
+	// 背景
+	std::unique_ptr<BackGround> backGround_;
+
 	// 時間
 	std::unique_ptr<Timer> timer_;
+
+	// ハートの画像
+	Sprite* textureHeart_[3];
+	Vector2 heartSize_;
 
 	// BGM
 	uint32_t gameBGMHandle_;
@@ -114,6 +150,11 @@ private: // メンバ変数
 	uint32_t playChain_;
 	bool isChain_;
 	bool isSound;
+
+	uint32_t damageHandle_;
+	uint32_t playDamage_;
+	bool isDamage_;
+	bool isHit;
 
 	/// <summary>
 	/// ゲームシーン用

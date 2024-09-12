@@ -1,12 +1,17 @@
 #include "ResultScene.h"
+#include "TextureManager.h"
+#include <cassert>
 
 void ResultScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+	// 画像の初期化
+	TextureInitialize();
 }
 
 void ResultScene::Update() {
+	textureDeleteTime += 1;
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneEnd_ = true;
 	}
@@ -49,6 +54,10 @@ void ResultScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+	
+	if (textureDeleteTime % 10 != 0) {
+		textureGameClear_->Draw();
+	}
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -56,6 +65,15 @@ void ResultScene::Draw() {
 #pragma endregion
 }
 
-void ResultScene::SceneReset() {
-	isSceneEnd_ = false;
+void ResultScene::SceneReset() { 
+	isSceneEnd_ = false; 
+	textureDeleteTime = 0;
+}
+
+void ResultScene::TextureInitialize() {
+	// ゲームクリアの画像
+	uint32_t GameClearHandle;
+	GameClearHandle = TextureManager::Load("GameClear.png");
+
+	textureGameClear_ = Sprite::Create(GameClearHandle, {500.0f, 400.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
