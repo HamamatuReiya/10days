@@ -6,9 +6,13 @@
 
 class Spike {
 public:
-	void Initialize(Model* model ,Model* model2);
+	void Initialize(Model* model, Model* model2, Model* model4);
 
 	void Update(float speed);
+
+	void Update2(float speed);
+
+	void Update3(float speed);
 
 	void Draw(ViewProjection& viewProjection);
 
@@ -23,6 +27,8 @@ public:
 	Vector3 GetWorldPosition9();
 	Vector3 GetWorldPosition10();
 
+	Vector3 GetWorldPosition99();
+
 	bool GetCollisionFlag() { return collisionFlag; }
 
 private:
@@ -30,7 +36,7 @@ private:
 	WorldTransform worldTransform1_[5];
 	WorldTransform worldTransform2_[5];
 
-	WorldTransform worldTransformBase_[2];
+	WorldTransform worldTransformBase_[3];
 
 	WorldTransform worldTransformPattern_[10][5];
 
@@ -43,9 +49,15 @@ private:
 	int collisionCount;
 	bool collisionFlag;
 
+	int popObjCount = 0;
+
+
 	// モデル
 	Model* model_ = nullptr;
 
 	Model* model2_ = nullptr;
 
+	Model* model3_ = nullptr;
+
+	Model* model4_ = nullptr;
 };

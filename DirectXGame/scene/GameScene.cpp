@@ -26,7 +26,8 @@ void GameScene::Initialize() {
 	spike_ = std::make_unique<Spike>();
 	modelSpike1_.reset(Model::CreateFromOBJ("Spike01", true));
 	modelSpike2_.reset(Model::CreateFromOBJ("Spike02", true));
-	spike_->Initialize(modelSpike1_.get(), modelSpike2_.get());
+	modelGoalObj_.reset(Model::CreateFromOBJ("GoalObj", true));
+	spike_->Initialize(modelSpike1_.get(), modelSpike2_.get(), modelGoalObj_.get());
 	
 	player_ = std::make_unique<Player>();
 	modelPlayer_[0].reset(Model::CreateFromOBJ("Player01", true));
@@ -72,7 +73,7 @@ void GameScene::Update() {
 
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
-		spike_->Update(speed);
+		spike_->Update2(speed);
 		player_->Update();
 		if (spike_->GetCollisionFlag() == true) {
 			ChackAllCollisions();
@@ -166,6 +167,8 @@ void GameScene::ChackAllCollisions() {
 	spikePos[8] = spike_->GetWorldPosition9();
 	spikePos[9] = spike_->GetWorldPosition10();
 
+	Vector3 goalPos = spike_->GetWorldPosition99();
+
 	for (int i = 0; i < 10; i++) {
 		hit[i] = (spikePos[i].x - playerPos.x) * (spikePos[i].x - playerPos.x) + (spikePos[i].y - playerPos.y) * (spikePos[i].y - playerPos.y) + (spikePos[i].z - playerPos.z) * (spikePos[i].z - playerPos.z);
 	}
@@ -189,6 +192,10 @@ void GameScene::ChackAllCollisions() {
 
 	if (player_->GetLife() < 0) {
 		gameOverFlag = true;
+	}
+
+	if (playerPos.y <= goalPos.y+10.0f) {
+		isSceneEnd_ = true;
 	}
 
 	for (int i = 0; i < 10; i++) {
