@@ -156,6 +156,10 @@ private: // メンバ変数
 	bool isDamage_;
 	bool isHit;
 
+	uint32_t speedUPHandle_;
+	uint32_t playSpeedUP_;
+	bool isSpeedUP_;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
