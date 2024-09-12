@@ -109,11 +109,12 @@ void GameScene::Update() {
 		if (gameOverFlag == false) {
 			isSceneEnd_ = true;
 		} 
-		else {
-			isSceneEnd2_ = true;
-		}
 	}
 #endif // DEBUG
+
+	if (input_->TriggerKey(DIK_SPACE) && gameOverFlag == true) {
+		isSceneEnd2_ = true;
+	}
 
 	//体力の表示の処理
 	for (int i = 0; i < player_->GetLife(); i++) {
