@@ -275,6 +275,10 @@ void GameScene::SceneReset() {
 	speedDownTextureTimer = 120.0f;
 	isSpeedUP = false;
 	isSpeedDown = false;
+
+	fade_->FadeReset();
+	fadeTimerFlag_ = false;
+	fadeTimer_ = kFadeTimer_;
 }
 
 void GameScene::BGMReset() { 
