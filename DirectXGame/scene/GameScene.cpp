@@ -174,10 +174,10 @@ void GameScene::Update() {
 		fade_->FadeOutStart();
 	}
 	// フェード開始
-	if (fadeTimerFlag_ == true) {
+	if (fadeTimerFlag_ == true && gameOverFlag == true) {
 		fadeTimer_--;
 	}
-	if (fadeTimer_ <= 0) {
+	if (fadeTimer_ <= 0 && gameOverFlag == true) {
 		isSceneEnd2_ = true;
 	}
 
