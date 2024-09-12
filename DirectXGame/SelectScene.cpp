@@ -27,20 +27,21 @@ void SelectScene::Initialize() {
 void SelectScene::Update() { 
 	
 	//ステージカウントが最大ステージ数いないの時、場面が切り替わっていない時
-	if (stageCount_ >= 0 || stageCount_ <= kMaxStage_ && fadeTimerFlag_ == false) {
-		//ステージ選択
-		if (input_->TriggerKey(DIK_RIGHT)) {
-			stageCount_ += 1;
-		} 
-		else if (input_->TriggerKey(DIK_LEFT)) {
-			stageCount_ -= 1;
-		}
-		//決定
-		if (input_->TriggerKey(DIK_SPACE)) {
-			//フェードを開始するフラグ
-			fadeTimerFlag_ = true;
-			//フェードアウトを始めるフラグ
-			fade_->FadeOutStart();
+	if (stageCount_ >= 0 || stageCount_ <= kMaxStage_) {
+		if (fadeTimerFlag_ == false) {
+			// ステージ選択
+			if (input_->TriggerKey(DIK_RIGHT)) {
+				stageCount_ += 1;
+			} else if (input_->TriggerKey(DIK_LEFT)) {
+				stageCount_ -= 1;
+			}
+			// 決定
+			if (input_->TriggerKey(DIK_SPACE)) {
+				// フェードを開始するフラグ
+				fadeTimerFlag_ = true;
+				// フェードアウトを始めるフラグ
+				fade_->FadeOutStart();
+			}
 		}
 	}
 	//フェードが開始したとき

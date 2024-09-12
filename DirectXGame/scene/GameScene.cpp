@@ -16,8 +16,6 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
-	// テクスチャの初期化
-	TextureInitialize();
 
 	speed = 0.2f;
 
@@ -37,6 +35,16 @@ void GameScene::Initialize() {
 	modelPlayer_[3].reset(Model::CreateFromOBJ("Player04", true));
 	modelPlayer_[4].reset(Model::CreateFromOBJ("Player05", true));
 	player_->Initialize(modelPlayer_[0].get(), modelPlayer_[1].get(), modelPlayer_[2].get(), modelPlayer_[3].get(), modelPlayer_[4].get());
+
+	// テクスチャの初期化
+	TextureInitialize();
+
+	// 背景の生成
+	backGround_ = std::make_unique<BackGround>();
+	// 3Dモデルの生成
+	backGroundModel_.reset(Model::CreateFromOBJ("background", true));
+	// 背景の初期化
+	backGround_->Initialize(backGroundModel_.get());
 
 	// 時間
 	timer_ = std::make_unique<Timer>();
@@ -86,6 +94,13 @@ void GameScene::Update() {
 	}
 #endif // DEBUG
 
+	//体力の表示の処理
+	for (int i = 0; i < player_->GetLife(); i++) {
+		heartSize_ = textureHeart_[i]->GetSize();
+		heartSize_ = {50.0f, 50.0f};
+		textureHeart_[i]->SetSize(heartSize_);
+	}
+
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
 		spike_->Update(speed);
@@ -111,6 +126,9 @@ void GameScene::Update() {
 			isSpeedDown = false;
 		}
 	}
+
+	// 背景更新
+	backGround_->Update();
 }
 
 void GameScene::Draw() {
@@ -138,14 +156,16 @@ void GameScene::Draw() {
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
-	
+	/// </summary>
+
 	chain_->Draw(viewProjection_);
 	if (coolTimeDrawCount <= 5) {
 		player_->Draw(viewProjection_);
 	}
 	spike_->Draw(viewProjection_);
 	
-	/// </summary>
+	// 背景描画
+	backGround_->Draw(viewProjection_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
@@ -161,6 +181,11 @@ void GameScene::Draw() {
 
 	//  時間表示
 	timer_->Draw();
+
+	//体力の表示
+	for (int i = 0; i < player_->GetLife(); i++) {
+		textureHeart_[i]->Draw();
+	}
 
 	// スピードアップ
 	if (isSpeedUP == true) {
@@ -203,6 +228,12 @@ void GameScene::BGMStop() {
 }
 
 void GameScene::TextureInitialize() {
+	uint32_t heartHandle[3];
+	for (int i = 0; i < player_->GetLife(); i++) {
+		heartHandle[i] = TextureManager::Load("heart.png");
+		textureHeart_[i] = Sprite::Create(heartHandle[i], {i * 55.0f + 10, 10.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+	}
+
 	// スピードアップの画像
 	uint32_t SpeedUpHandle;
 	SpeedUpHandle = TextureManager::Load("SpeedUP.png");

@@ -13,6 +13,8 @@
 #include "Player.h"
 #include "Timer.h"
 
+#include "BackGround.h"
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -64,6 +66,10 @@ public:
 
 	void BGMStop();
 
+private:
+	// 画像の初期化
+	void TextureInitialize();
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -73,9 +79,6 @@ private: // メンバ変数
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
-
-	// 画像の初期化
-	void TextureInitialize();
 
 	// スピードアップの画像
 	Sprite* textureSpeedUP_;
@@ -117,8 +120,17 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelPlayer_[5];
 	std::unique_ptr<Player> player_;
 
+	// 背景3Dモデル
+	std::unique_ptr<Model> backGroundModel_ = nullptr;
+	// 背景
+	std::unique_ptr<BackGround> backGround_;
+
 	// 時間
 	std::unique_ptr<Timer> timer_;
+
+	// ハートの画像
+	Sprite* textureHeart_[3];
+	Vector2 heartSize_;
 
 	// BGM
 	uint32_t gameBGMHandle_;
