@@ -1,8 +1,16 @@
 #include "ResultScene.h"
 
-void ResultScene::Initialize() {}
+void ResultScene::Initialize() {
+	dxCommon_ = DirectXCommon::GetInstance();
+	input_ = Input::GetInstance();
+	audio_ = Audio::GetInstance();
+}
 
-void ResultScene::Update() {}
+void ResultScene::Update() {
+	if (input_->TriggerKey(DIK_SPACE)) {
+		isSceneEnd_ = true;
+	}
+}
 
 void ResultScene::Draw() {
 	// コマンドリストの取得
@@ -48,4 +56,6 @@ void ResultScene::Draw() {
 #pragma endregion
 }
 
-void ResultScene::SceneReset() {}
+void ResultScene::SceneReset() {
+	isSceneEnd_ = false;
+}

@@ -22,8 +22,7 @@ void TitleScene::Initialize() {
 
 	// BGM
 	titleBGMHandle_ = audio_->LoadWave("BGM/title.mp3");
-	//titleBGMHandle_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
-	isTitleBGM = false;
+	playTitleBGM_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
 
 	// SE
 	systemHandle_ = audio_->LoadWave("SE/system.mp3");
@@ -33,7 +32,7 @@ void TitleScene::Initialize() {
 void TitleScene::Update() {
 	// SE
 	if (isClick == true) {
-		/*playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);*/
+		playSystem_ = audio_->PlayWave(systemHandle_, false, 1.0);
 		isClick = false;
 	}
 
@@ -109,4 +108,12 @@ void TitleScene::SceneReset() {
 	fade_->FadeReset(); 
 	fadeTimerFlag_ = false;
 	fadeTimer_ = kFadeTimer_;
+}
+
+void TitleScene::BGMReset() { 
+	playTitleBGM_ = audio_->PlayWave(titleBGMHandle_, true, 0.5);
+}
+
+void TitleScene::BGMStop() {
+	audio_->StopWave(playTitleBGM_);
 }

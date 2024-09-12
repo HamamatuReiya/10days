@@ -40,6 +40,9 @@ void GameScene::Initialize() {
 	timer_ = std::make_unique<Timer>();
 	timer_->Initialize();
 
+	// BGM
+	gameBGMHandle_ = audio_->LoadWave("BGM/gameplay.mp3");
+
 	// SE
 	chainHandle_ = audio_->LoadWave("SE/chain.mp3");
 	isSound = false;
@@ -52,7 +55,7 @@ void GameScene::Update() {
 	}
 	// SE
 	if (isSound == false) {
-		/*playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);*/
+		playChain_ = audio_->PlayWave(chainHandle_, true, 1.0);
 		isSound = true;
 	}
 
@@ -62,6 +65,15 @@ void GameScene::Update() {
 
 	// 時間更新
 	timer_->Update();
+
+	// シーン移動
+#ifdef _DEBUG
+	if (input_->TriggerKey(DIK_SPACE)) {
+		isSceneEnd_ = true;
+	}
+#endif // DEBUG
+	
+
 }
 
 void GameScene::Draw() {
@@ -119,4 +131,16 @@ void GameScene::Draw() {
 
 void GameScene::SceneReset() { 
 	timer_->Reset(); 
+	speed = 0.2f;
+	isSceneEnd_ = false;
+	audio_->StopWave(playChain_);
+	isSound = false;
+}
+
+void GameScene::BGMReset() { 
+	playGameBGM_ = audio_->PlayWave(gameBGMHandle_, true, 0.5);
+}
+
+void GameScene::BGMStop() { 
+	audio_->StopWave(playGameBGM_);
 }

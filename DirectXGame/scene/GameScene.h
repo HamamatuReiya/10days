@@ -53,6 +53,10 @@ public:
 	bool IsSceneEnd() { return isSceneEnd_; }
 	SceneType NextScene() { return SceneType::kResult; }
 
+	void BGMReset();
+
+	void BGMStop();
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -77,6 +81,11 @@ private: // メンバ変数
 
 	// 時間
 	std::unique_ptr<Timer> timer_;
+
+	// BGM
+	uint32_t gameBGMHandle_;
+	uint32_t playGameBGM_;
+	bool isGameBGM_;
 
 	// SE
 	uint32_t chainHandle_;
