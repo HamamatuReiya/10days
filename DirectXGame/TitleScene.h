@@ -66,6 +66,8 @@ private: // メンバ変数
 	//スペースボタンを押す
 	Sprite* texturePushSpace_;
 
+	int textureTime = 0;
+
 	// 3Dモデル
 	std::unique_ptr<Model> backGroundModel_ = nullptr;
 	// 背景
