@@ -98,10 +98,10 @@ void SelectScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
-	textureNumber_[0]->Draw();
+	//textureNumber_[0]->Draw();
 	textureNumber_[1]->Draw();
 	textureNumber_[2]->Draw();
-	//textureNumber_[3]->Draw();
+	textureNumber_[3]->Draw();
 
 	textureCursor_->Draw();
 
@@ -152,17 +152,17 @@ void SelectScene::StageSelect() {
 	}
 
 	if (stageCount_ == 0) {
-		cursorPos_.x = 50.0f - 30;
+		cursorPos_.x = 313.0f - 30;
 		stageNo = Stage::kStage1;
 	}
 
 	if (stageCount_ == 1) {
-		cursorPos_.x = 313.0f - 30;
+		cursorPos_.x = 600.0f - 30;
 		stageNo = Stage::kStage2;
 	}
 
 	if (stageCount_ == 2) {
-		cursorPos_.x = 600.0f - 30;
+		cursorPos_.x = 853.0f - 30;
 		stageNo = Stage::kStage3;
 	}
 }
