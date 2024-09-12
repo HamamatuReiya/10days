@@ -179,6 +179,11 @@ void GameScene::SceneReset() {
 	isSceneEnd_ = false;
 	//audio_->StopWave(playChain_);
 	isSound = false;
+	speedUPTextureTimer = 120.0f;
+	speedDownTextureTimer = 120.0f;
+	isSpeedUP = false;
+	isSpeedDown = false;
+
 }
 
 void GameScene::BGMReset() { 
