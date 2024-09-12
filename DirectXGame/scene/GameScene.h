@@ -44,6 +44,8 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
+	void ChackAllCollisions();
+
 public:
 
 	void SceneReset();
@@ -71,6 +73,19 @@ private: // メンバ変数
 	std::unique_ptr<Model> modelSpike1_;
 	std::unique_ptr<Model> modelSpike2_;
 	std::unique_ptr<Spike> spike_;
+
+	Vector3 spikePos[10];
+	float hit[10];
+	float playerRadius = 2.0f;
+	float spikeRadius = 5.0f;
+	float spikeCollisionRadius = 9.0f;
+	bool gameOverFlag = false;
+	bool grazeFlag = false;
+
+	bool coolTimeDrawFlag = false;
+	int coolTimeDrawCount = 0;
+	bool hitCoolTimeFlag = false;
+	int hitCoolTime = 0;
 
 	std::unique_ptr<Model> modelPlayer_[5];
 	std::unique_ptr<Player> player_;

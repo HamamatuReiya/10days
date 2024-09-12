@@ -9,10 +9,72 @@ void Player::Initialize(Model* model, Model* model2, Model* model3, Model* model
 	worldTransform_.Initialize();
 	worldTransform_.scale_ = {2.0f, 2.0f, 2.0f};
 	worldTransform_.rotation_ = {0.0f, 1.6f, 0.3f};
-	worldTransform_.translation_ = {0.0f, 0.0f, -2.5f};
+	worldTransform_.translation_ = {0.0f, 8.0f, -2.5f};
+	input_ = Input::GetInstance();
+	widthSpeed = 1.0f;
 }
 
-void Player::Update() { worldTransform_.UpdateMatrix(); }
+void Player::Update() { 
+	if (input_->TriggerKey(DIK_LEFT)) {
+		if (leftMoveFlag == false && rightMoveFlag == false) {
+			leftMoveFlag = true;
+			GrazeFlag = true;
+		}
+	}
+	if (input_->TriggerKey(DIK_RIGHT)) {
+			if (leftMoveFlag == false && rightMoveFlag == false) {
+				rightMoveFlag = true;
+			    GrazeFlag = true;
+			}
+	}
+
+	if (GrazeFlag == true) {
+		    count++;
+		    if (count >= 10) {
+			    count = 0;
+			    GrazeFlag = false;
+			}
+	}
+
+	if (leftMoveFlag == true) {
+		worldTransform_.translation_.x -= widthSpeed;
+	}
+	else if (rightMoveFlag == true) {
+		worldTransform_.translation_.x += widthSpeed;
+	}
+
+	if (worldTransform_.translation_.x <= -20.0f) {
+		worldTransform_.translation_.x = -20.0f;
+		leftMoveFlag = false;
+		senterStopFlag = false;
+	}
+
+	if (worldTransform_.translation_.x >= 20.0f) {
+		worldTransform_.translation_.x = 20.0f;
+		rightMoveFlag = false;
+		senterStopFlag = false;
+	}
+
+	if (rightMoveFlag == true && senterStopFlag==false) {
+		if (worldTransform_.translation_.x >= 0) {
+			worldTransform_.translation_.x = 0;
+			senterStopFlag = true;
+			rightMoveFlag = false;
+		}
+	}
+	
+	if (leftMoveFlag == true && senterStopFlag == false) {
+		if (worldTransform_.translation_.x <= 0) {
+			worldTransform_.translation_.x = 0;
+			senterStopFlag = true;
+			leftMoveFlag = false;
+		}
+	}
+
+	
+
+	worldTransform_.UpdateMatrix();
+}
 
 void Player::Draw(ViewProjection& viewProjection) {
 	model_[0]->Draw(worldTransform_, viewProjection);
@@ -21,3 +83,16 @@ void Player::Draw(ViewProjection& viewProjection) {
 	model_[3]->Draw(worldTransform_, viewProjection);
 	model_[4]->Draw(worldTransform_, viewProjection);
 }
+
+Vector3 Player::GetWorldPosition() {
+	Vector3 worldPos;
+
+	worldPos.x = worldTransform_.matWorld_.m[3][0];
+	worldPos.y = worldTransform_.matWorld_.m[3][1];
+	worldPos.z = worldTransform_.matWorld_.m[3][2];
+
+	return worldPos;
+}
+
+void Player::Oncollision() { life -= 1; }
+

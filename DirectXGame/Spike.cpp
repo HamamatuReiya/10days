@@ -14,15 +14,16 @@ void Spike::Initialize(Model* model, Model* model2) {
 
 	for (int i = 0; i < 5; i++) {
 		worldTransform1_[i].Initialize();
-		worldTransform1_[i].translation_ = {0.0f, -width * i, -3.0f};
+		worldTransform1_[i].translation_ = {0.0f, 100, -3.0f};
 		worldTransform1_[i].scale_ = {5.0f, 5.0f, 5.0f};
 
 		worldTransform2_[i].Initialize();
-		worldTransform2_[i].translation_ = {0.0f, -width * i, -3.0f};
+		worldTransform2_[i].translation_ = {0.0f, 100, -3.0f};
 		worldTransform2_[i].scale_ = {5.0f, 5.0f, 5.0f};
 	}
 
-	
+	collisionFlag = false;
+	collisionCount = 0;
 
 	worldTransformPattern_[0][0].translation_ = {0.0f, 0.0f, -3.0f};
 	worldTransformPattern_[0][1].translation_ = {-20.0f, -width, -3.0f};
@@ -57,6 +58,13 @@ void Spike::Initialize(Model* model, Model* model2) {
 }
 
 void Spike::Update(float speed) {
+	if (collisionFlag == false) {
+		collisionCount++;
+	}
+
+	if (collisionCount >= 10) {
+		collisionFlag = true;
+	}
 
 	worldTransformBase_[0].translation_.y += speed;
 	worldTransformBase_[1].translation_.y += speed;
@@ -97,4 +105,96 @@ void Spike::Draw(ViewProjection& viewProjection) {
 		model_->Draw(worldTransform2_[i], viewProjection);
 		model2_->Draw(worldTransform2_[i], viewProjection);
 	}
+}
+
+Vector3 Spike::GetWorldPosition1() {
+	Vector3 worldPos;
+
+		worldPos.x = worldTransform1_[0].matWorld_.m[3][0];
+		worldPos.y = worldTransform1_[0].matWorld_.m[3][1];
+		worldPos.z = worldTransform1_[0].matWorld_.m[3][2];
+
+		return worldPos;
+}
+
+Vector3 Spike::GetWorldPosition2() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[1].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[1].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[1].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition3() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[2].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[2].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[2].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition4() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[3].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[3].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[3].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition5() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[4].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[4].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[4].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition6() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[5].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[5].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[5].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition7() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[6].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[6].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[6].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition8() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[7].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[7].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[7].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition9() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[8].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[8].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[8].matWorld_.m[3][2];
+
+	    return worldPos;
+}
+Vector3 Spike::GetWorldPosition10() {
+	    Vector3 worldPos;
+
+	    worldPos.x = worldTransform1_[9].matWorld_.m[3][0];
+	    worldPos.y = worldTransform1_[9].matWorld_.m[3][1];
+	    worldPos.z = worldTransform1_[9].matWorld_.m[3][2];
+
+	    return worldPos;
 }

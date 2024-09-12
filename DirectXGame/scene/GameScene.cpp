@@ -46,7 +46,7 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() { 
-	speed += 0.0005f;
+	//speed += 0.0005f;
 	if (speed > 1.0f) {
 		speed = 1.0f;
 	}
@@ -56,12 +56,16 @@ void GameScene::Update() {
 		isSound = true;
 	}
 
-	chain_->Update(speed);
-	spike_->Update(speed);
-	player_->Update();
-
-	// 時間更新
-	timer_->Update();
+	if (gameOverFlag == false) {
+		chain_->Update(speed);
+		spike_->Update(speed);
+		player_->Update();
+		if (spike_->GetCollisionFlag() == true) {
+			ChackAllCollisions();
+		}
+		// 時間更新
+		timer_->Update();
+	}
 }
 
 void GameScene::Draw() {
@@ -91,7 +95,9 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	
 	chain_->Draw(viewProjection_);
-	player_->Draw(viewProjection_);
+	if (coolTimeDrawCount <= 5) {
+		player_->Draw(viewProjection_);
+	}
 	spike_->Draw(viewProjection_);
 	
 	/// </summary>
@@ -119,4 +125,65 @@ void GameScene::Draw() {
 
 void GameScene::SceneReset() { 
 	timer_->Reset(); 
+}
+
+void GameScene::ChackAllCollisions() { 
+	Vector3 playerPos = player_->GetWorldPosition();
+	spikePos[0] = spike_->GetWorldPosition1();
+	spikePos[1] = spike_->GetWorldPosition2();
+	spikePos[2] = spike_->GetWorldPosition3();
+	spikePos[3] = spike_->GetWorldPosition4();
+	spikePos[4] = spike_->GetWorldPosition5();
+	spikePos[5] = spike_->GetWorldPosition6();
+	spikePos[6] = spike_->GetWorldPosition7();
+	spikePos[7] = spike_->GetWorldPosition8();
+	spikePos[8] = spike_->GetWorldPosition9();
+	spikePos[9] = spike_->GetWorldPosition10();
+
+	for (int i = 0; i < 10; i++) {
+		hit[i] = (spikePos[i].x - playerPos.x) * (spikePos[i].x - playerPos.x) + (spikePos[i].y - playerPos.y) * (spikePos[i].y - playerPos.y) + (spikePos[i].z - playerPos.z) * (spikePos[i].z - playerPos.z);
+	}
+
+	float radius = (playerRadius + spikeRadius) * (playerRadius + spikeRadius);
+	float graze = (playerRadius + spikeCollisionRadius) * (playerRadius + spikeCollisionRadius);
+
+	if (hitCoolTimeFlag == true) {
+		hitCoolTime++;
+		coolTimeDrawCount++;
+		if (coolTimeDrawCount >= 10) {
+			coolTimeDrawCount = 0;
+		}
+		speed = 0.2f;
+		if (hitCoolTime >= 120) {
+			hitCoolTime = 0;
+			hitCoolTimeFlag = false;
+			coolTimeDrawFlag = false;
+		}
+	}
+
+	if (player_->GetLife() < 0) {
+		gameOverFlag = true;
+	}
+
+	for (int i = 0; i < 10; i++) {
+		if (hitCoolTimeFlag == false) {
+			if (hit[i] <= radius) {
+				hitCoolTimeFlag = true;
+				coolTimeDrawFlag = true;
+				player_->Oncollision();
+			}
+		}
+
+		if (hit[i] <= graze && grazeFlag == false) {
+			if (player_->GetGrazeFlag() == true) {
+				grazeFlag = true;
+				speed += 0.04f;
+			}
+		}
+	}
+
+	if (player_->GetGrazeFlag() == false) {
+		grazeFlag = false;
+	}
+
 }

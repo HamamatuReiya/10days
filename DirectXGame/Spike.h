@@ -12,6 +12,19 @@ public:
 
 	void Draw(ViewProjection& viewProjection);
 
+	Vector3 GetWorldPosition1();
+	Vector3 GetWorldPosition2();
+	Vector3 GetWorldPosition3();
+	Vector3 GetWorldPosition4();
+	Vector3 GetWorldPosition5();
+	Vector3 GetWorldPosition6();
+	Vector3 GetWorldPosition7();
+	Vector3 GetWorldPosition8();
+	Vector3 GetWorldPosition9();
+	Vector3 GetWorldPosition10();
+
+	bool GetCollisionFlag() { return collisionFlag; }
+
 private:
 
 	WorldTransform worldTransform1_[5];
@@ -26,6 +39,9 @@ private:
 	bool startFlag = false;
 
 	int randNumber[2] = {0};
+
+	int collisionCount;
+	bool collisionFlag;
 
 	// モデル
 	Model* model_ = nullptr;
