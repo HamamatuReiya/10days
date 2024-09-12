@@ -11,6 +11,7 @@
 
 #include "fade/Fade.h"
 #include "Stage.h"
+#include "BackGround.h"
 
 class SelectScene : public StageSelect {
 public:
@@ -58,8 +59,16 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 
+	// ビュープロジェクション
+	ViewProjection viewProjection_;
+
 	// シーンを終わらせる変数
 	bool isSceneEnd_ = false;
+
+	// 3Dモデル
+	std::unique_ptr<Model> backGroundModel_ = nullptr;
+	// 背景
+	std::unique_ptr<BackGround> backGround_;
 
 	// 数字の画像
 	Sprite* textureNumber_[10];

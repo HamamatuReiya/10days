@@ -57,6 +57,13 @@ void GameScene::Initialize() {
 	timer_ = std::make_unique<Timer>();
 	timer_->Initialize();
 
+	// フェードの生成
+	fade_ = std::make_unique<Fade>();
+	// フェードの初期化
+	fade_->Initialize();
+	// フェードインの開始
+	fade_->FadeInStart();
+
 	// BGM
 	gameBGMHandle_ = audio_->LoadWave("BGM/gameplay.mp3");
 
@@ -357,6 +364,15 @@ void GameScene::ChackAllCollisions() {
 	}
 
 	if (playerPos.y <= goalPos.y+10.0f) {
+		//フェードアウトスタート
+		fadeTimerFlag_ = true;
+		fade_->FadeOutStart();
+	}
+	//フェード開始
+	if (fadeTimerFlag_ == true) {
+		fadeTimer_--;
+	}
+	if (fadeTimer_ <= 0) {
 		isSceneEnd_ = true;
 	}
 
