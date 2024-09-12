@@ -16,6 +16,9 @@ void TitleScene::Initialize() {
 	titleHandle_ = TextureManager::Load("title.png");
 	textureTitle_ = Sprite::Create(titleHandle_, {0.0f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 
+	uint32_t pushSpaceHandle_ = TextureManager::Load("title.png");
+	texturePushSpace_ = Sprite::Create(pushSpaceHandle_, {0.0f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
 	// フェードの生成
 	fade_ = std::make_unique<Fade>();
 	// フェードの初期化
@@ -110,6 +113,8 @@ void TitleScene::Draw() {
 	//タイトルの画像
 	textureTitle_->Draw();
 	
+	texturePushSpace_->Draw();
+
 	// フェードの描画
 	fade_->Draw();
 
