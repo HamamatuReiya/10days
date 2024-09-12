@@ -66,6 +66,7 @@ private: // メンバ変数
 
 	// テキストの画像
 	Sprite* textureText_;
+	Sprite* textureText2_;
 
 	// 矢印 カーソル
 	Sprite* textureCursor_;
