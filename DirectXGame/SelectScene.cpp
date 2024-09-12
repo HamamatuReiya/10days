@@ -171,6 +171,7 @@ void SelectScene::StageSelect() {
 void SelectScene::SceneReset() {
 	fade_->FadeReset();
 	isSceneEnd_ = false;
+	stageCount_ = 0;
 	fadeTimerFlag_ = false;
 	fadeTimer_ = kFadeTimer_;
 }

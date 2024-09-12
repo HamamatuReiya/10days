@@ -66,6 +66,20 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() { 
+	switch (stageNo) {
+	case Stage::kStage1:
+
+		break;
+	case Stage::kStage2:
+
+		break;
+	case Stage::kStage3:
+
+		break;
+	default:
+		break;
+	}
+
 	//speed += 0.0005f;
 	if (speed > 1.0f) {
 		speed = 1.0f;

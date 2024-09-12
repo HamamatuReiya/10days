@@ -13,12 +13,13 @@
 #include "Player.h"
 #include "Timer.h"
 
+#include <Stage.h>
 #include "BackGround.h"
 
 /// <summary>
 /// ゲームシーン
 /// </summary>
-class GameScene {
+class GameScene : public StageSelect {
 
 public: // メンバ関数
 	/// <summary>
