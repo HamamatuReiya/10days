@@ -64,6 +64,9 @@ private: // メンバ変数
 	// 数字の画像
 	Sprite* textureNumber_[10];
 
+	// テキストの画像
+	Sprite* textureText_;
+
 	// 矢印 カーソル
 	Sprite* textureCursor_;
 	Vector2 cursorPos_ = {0, 350};

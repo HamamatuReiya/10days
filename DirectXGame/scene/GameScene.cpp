@@ -16,6 +16,8 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
+	// テクスチャの初期化
+	TextureInitialize();
 
 	speed = 0.2f;
 
@@ -46,6 +48,14 @@ void GameScene::Initialize() {
 	// SE
 	chainHandle_ = audio_->LoadWave("SE/chain.mp3");
 	isSound = false;
+
+	damageHandle_ = audio_->LoadWave("SE/damage.mp3");
+	isHit = false;
+
+	// 画像の表示時間
+	speedUPTextureTimer = 120.0f;
+	speedDownTextureTimer = 120.0f;
+
 }
 
 void GameScene::Update() { 
@@ -59,6 +69,10 @@ void GameScene::Update() {
 		isSound = true;
 	}
 
+	if (isHit == true) {
+		//isDamage_ = audio_->PlayWave(damageHandle_, false, 1.0);
+		isHit = false;
+	}
 	
 
 	// シーン移動
@@ -67,8 +81,6 @@ void GameScene::Update() {
 		isSceneEnd_ = true;
 	}
 #endif // DEBUG
-	
-
 
 	if (gameOverFlag == false) {
 		chain_->Update(speed);
@@ -79,6 +91,21 @@ void GameScene::Update() {
 		}
 		// 時間更新
 		timer_->Update();
+	}
+
+	if (isSpeedUP == true) {
+		speedUPTextureTimer -= 1.0f;
+		if (speedUPTextureTimer < 0.0f) {
+			speedUPTextureTimer = 120.0f;
+			isSpeedUP = false;
+		}
+	} 
+	if (isSpeedDown == true) {
+		speedDownTextureTimer -= 1.0f;
+		if (speedDownTextureTimer < 0.0f) {
+			speedDownTextureTimer = 120.0f;
+			isSpeedDown = false;
+		}
 	}
 }
 
@@ -131,6 +158,15 @@ void GameScene::Draw() {
 	//  時間表示
 	timer_->Draw();
 
+	// スピードアップ
+	if (isSpeedUP == true) {
+		textureSpeedUP_->Draw();
+	}
+	// スピードダウン
+	if (isSpeedDown == true) {
+		textureSpeedDown_->Draw();
+	}
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 
@@ -151,6 +187,20 @@ void GameScene::BGMReset() {
 
 void GameScene::BGMStop() { 
 	//audio_->StopWave(playGameBGM_);
+}
+
+void GameScene::TextureInitialize() {
+	// スピードアップの画像
+	uint32_t SpeedUpHandle;
+	SpeedUpHandle = TextureManager::Load("SpeedUP.png");
+
+	textureSpeedUP_ = Sprite::Create(SpeedUpHandle, {500.0f, 50.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	// スピードダウンの画像
+	uint32_t SpeedDownHandle;
+	SpeedDownHandle = TextureManager::Load("SpeedDown.png");
+
+	textureSpeedDown_ = Sprite::Create(SpeedDownHandle, {500.0f, 100.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
 
 void GameScene::ChackAllCollisions() { 
@@ -180,6 +230,7 @@ void GameScene::ChackAllCollisions() {
 			coolTimeDrawCount = 0;
 		}
 		speed = 0.2f;
+		isSpeedDown = true;
 		if (hitCoolTime >= 120) {
 			hitCoolTime = 0;
 			hitCoolTimeFlag = false;
@@ -197,6 +248,7 @@ void GameScene::ChackAllCollisions() {
 				hitCoolTimeFlag = true;
 				coolTimeDrawFlag = true;
 				player_->Oncollision();
+				isHit = true;
 			}
 		}
 
@@ -204,6 +256,7 @@ void GameScene::ChackAllCollisions() {
 			if (player_->GetGrazeFlag() == true) {
 				grazeFlag = true;
 				speed += 0.04f;
+				isSpeedUP = true;
 			}
 		}
 	}

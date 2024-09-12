@@ -43,7 +43,7 @@ public:
 	bool isSceneEnd_ = false;
 
 	bool IsSceneEnd() { return isSceneEnd_; }
-	SceneType NextScene() { return SceneType::kGamePlay; }
+	SceneType NextScene() { return SceneType::kSelect; }
 
 	void BGMReset();
 

@@ -105,6 +105,8 @@ void SelectScene::Draw() {
 
 	textureCursor_->Draw();
 
+	textureText_->Draw();
+
 	// フェードの描画
 	fade_->Draw();
 
@@ -133,6 +135,12 @@ void SelectScene::TextureInitialize() {
 	cursorHandle = TextureManager::Load("cursor.png");
 
 	textureCursor_ = Sprite::Create(cursorHandle, {50.0f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	// テキストの画像
+	uint32_t textHandle;
+	textHandle = TextureManager::Load("./Resources/Text.png");
+
+	textureText_ = Sprite::Create(textHandle, {350.0f, 100.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
 
 void SelectScene::StageSelect() {

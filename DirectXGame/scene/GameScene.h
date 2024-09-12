@@ -69,6 +69,21 @@ private: // メンバ変数
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
 
+	// 画像の初期化
+	void TextureInitialize();
+
+	// スピードアップの画像
+	Sprite* textureSpeedUP_;
+	bool isSpeedUP;
+
+	// スピードダウンの画像
+	Sprite* textureSpeedDown_;
+	bool isSpeedDown;
+
+	// Speed画像の表示時間
+	float speedUPTextureTimer;
+	float speedDownTextureTimer;
+
 	float speed;
 
 	std::unique_ptr<Model> modelChain_;
@@ -107,6 +122,11 @@ private: // メンバ変数
 	uint32_t playChain_;
 	bool isChain_;
 	bool isSound;
+
+	uint32_t damageHandle_;
+	uint32_t playDamage_;
+	bool isDamage_;
+	bool isHit;
 
 	/// <summary>
 	/// ゲームシーン用
