@@ -1,10 +1,11 @@
 #include "Spike.h"
 
-void Spike::Initialize(Model* model, Model* model2, Model* model4) { 
+void Spike::Initialize(Model* model, Model* model2, Model* model3, Model* model4, Model* model5) { 
 	model_ = model;
 	model2_ = model2;
-
+	model3_ = model3;
 	model4_ = model4;
+	model5_ = model5;
 
 	startFlag = false;
 
@@ -32,6 +33,20 @@ void Spike::Initialize(Model* model, Model* model2, Model* model4) {
 	collisionFlag = false;
 	collisionCount = 0;
 
+	stage3Flag = false;
+
+	for (int i = 0; i < 7; i++) {
+		worldTransform1_3_[i].Initialize();
+		worldTransform1_3_[i].translation_ = {0.0f, 100, -3.0f};
+		worldTransform1_3_[i].scale_ = {5.0f, 5.0f, 5.0f};
+
+		worldTransform2_3_[i].Initialize();
+		worldTransform2_3_[i].translation_ = {0.0f, 100, -3.0f};
+		worldTransform2_3_[i].scale_ = {5.0f, 5.0f, 5.0f};
+	}
+
+	randNumber3[0] = {0};
+	randNumber3[1] = {1};
 
 	//ステージ１
 	worldTransformPattern_[0][0].translation_ = {0.0f, 0.0f, -3.0f};
@@ -94,9 +109,52 @@ void Spike::Initialize(Model* model, Model* model2, Model* model4) {
 	worldTransformPattern_[9][2].translation_ = {0.0f, -width * 2, -3.0f};
 	worldTransformPattern_[9][3].translation_ = {20.0f, -width * 3, -3.0f};
 	worldTransformPattern_[9][4].translation_ = {0.0f, -width * 4, -3.0f};
+
+	//ステージ３
+	worldTransformPattern_3_[0][0].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[0][1].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[0][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[0][3].translation_ = {20.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[0][4].translation_ = {0.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[0][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[0][6].translation_ = {-20.0f, -width, -3.0f};
+
+	worldTransformPattern_3_[1][0].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[1][1].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[1][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[1][3].translation_ = {20.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[1][4].translation_ = {0.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[1][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[1][6].translation_ = {-120.0f, -width, -3.0f};
+
+	worldTransformPattern_3_[2][0].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[2][1].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[2][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[2][3].translation_ = {20.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[2][4].translation_ = {0.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[2][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[2][6].translation_ = {-120.0f, -width, -3.0f};
+
+	worldTransformPattern_3_[3][0].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[3][1].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[3][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[3][3].translation_ = {20.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[3][4].translation_ = {0.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[3][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[3][6].translation_ = {-20.0f, -width, -3.0f};
+
+	worldTransformPattern_3_[4][0].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[4][1].translation_ = {-20.0f, -width, -3.0f};
+	worldTransformPattern_3_[4][2].translation_ = {0.0f, -width * 2, -3.0f};
+	worldTransformPattern_3_[4][3].translation_ = {20.0f, -width * 3, -3.0f};
+	worldTransformPattern_3_[4][4].translation_ = {0.0f, -width * 4, -3.0f};
+	worldTransformPattern_3_[4][5].translation_ = {-20.0f, 0.0f, -3.0f};
+	worldTransformPattern_3_[4][6].translation_ = {-20.0f, -width, -3.0f};
+
 }
 
 void Spike::Update(float speed) {
+	stage3Flag = false;
 	if (collisionFlag == false) {
 		collisionCount++;
 	}
@@ -144,6 +202,7 @@ void Spike::Update(float speed) {
 }
 
 void Spike::Update2(float speed) {
+	stage3Flag = false;
 	if (collisionFlag == false) {
 		collisionCount++;
 	}
@@ -172,8 +231,8 @@ void Spike::Update2(float speed) {
 	}
 
 	for (int i = 0; i < 5; i++) {
-		worldTransform1_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_[randNumber[0]][i].translation_);
-		worldTransform2_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_[randNumber[1]][i].translation_);
+		worldTransform1_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_[randNumber3[0]][i].translation_);
+		worldTransform2_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_[randNumber3[1]][i].translation_);
 		worldTransform2_[i].translation_.y += -width * 5;
 	}
 	if (startFlag == false) {
@@ -190,16 +249,81 @@ void Spike::Update2(float speed) {
 	worldTransformBase_[2].UpdateMatrix();
 }
 
-void Spike::Draw(ViewProjection& viewProjection) {
-	for (int i = 0; i < 5; i++) {
-		model_->Draw(worldTransform1_[i], viewProjection);
-		model2_->Draw(worldTransform1_[i], viewProjection);
+void Spike::Update3(float speed) {
+	stage3Flag = true;
+	if (collisionFlag == false) {
+		collisionCount++;
+	}
 
-		model_->Draw(worldTransform2_[i], viewProjection);
-		model2_->Draw(worldTransform2_[i], viewProjection);
+	if (collisionCount >= 10) {
+		collisionFlag = true;
+	}
+
+	worldTransformBase_[0].translation_.y += speed;
+	worldTransformBase_[1].translation_.y += speed;
+
+	if (popObjCount <= 20) {
+		if (worldTransformBase_[0].translation_.y >= width * 6) {
+			worldTransformBase_[0].translation_.y = -width * 4;
+			randNumber3[0] = rand() % 5 + 10;
+			popObjCount++;
+		}
+
+		if (worldTransformBase_[1].translation_.y >= width * 11) {
+			worldTransformBase_[1].translation_.y = width;
+			randNumber3[1] = rand() % 5 + 10;
+			popObjCount++;
+		}
+	} else {
+		worldTransformBase_[2].translation_.y += speed;
+	}
+
+	for (int i = 0; i < 7; i++) {
+		worldTransform1_3_[i].translation_ = Add(worldTransformBase_[0].translation_, worldTransformPattern_[randNumber[0]][i].translation_);
+		worldTransform2_3_[i].translation_ = Add(worldTransformBase_[1].translation_, worldTransformPattern_[randNumber[1]][i].translation_);
+		worldTransform2_3_[i].translation_.y += -width * 5;
+	}
+	if (startFlag == false) {
+		startFlag = true;
+		worldTransformBase_[0].translation_.y -= width * 5;
+		worldTransformBase_[1].translation_.y -= width * 5;
+	}
+	for (int i = 0; i < 7; i++) {
+		worldTransform1_3_[i].UpdateMatrix();
+		worldTransform2_3_[i].UpdateMatrix();
+	}
+	worldTransformBase_[0].UpdateMatrix();
+	worldTransformBase_[1].UpdateMatrix();
+	worldTransformBase_[2].UpdateMatrix();
+}
+
+void Spike::Draw(ViewProjection& viewProjection) {
+	if (stage3Flag == false) {
+		for (int i = 0; i < 5; i++) {
+			model_->Draw(worldTransform1_[i], viewProjection);
+			model2_->Draw(worldTransform1_[i], viewProjection);
+
+			model_->Draw(worldTransform2_[i], viewProjection);
+			model2_->Draw(worldTransform2_[i], viewProjection);
+		}
+	} else if (stage3Flag == true) {
+		for (int i = 0; i < 6; i++) {
+			model_->Draw(worldTransform1_3_[i], viewProjection);
+			model2_->Draw(worldTransform1_3_[i], viewProjection);
+
+			model_->Draw(worldTransform2_3_[i], viewProjection);
+			model2_->Draw(worldTransform2_3_[i], viewProjection);
+		}
+		model3_->Draw(worldTransform1_3_[6], viewProjection);
+		model5_->Draw(worldTransform1_3_[6], viewProjection);
+
+		model3_->Draw(worldTransform2_3_[6], viewProjection);
+		model5_->Draw(worldTransform2_3_[6], viewProjection);
 	}
 
 	model4_->Draw(worldTransformBase_[2], viewProjection);
+
+
 
 }
 

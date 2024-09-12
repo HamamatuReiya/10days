@@ -26,8 +26,10 @@ void GameScene::Initialize() {
 	spike_ = std::make_unique<Spike>();
 	modelSpike1_.reset(Model::CreateFromOBJ("Spike01", true));
 	modelSpike2_.reset(Model::CreateFromOBJ("Spike02", true));
+	modelSpike3_.reset(Model::CreateFromOBJ("FakeSpike", true));
+	modelSpike4_.reset(Model::CreateFromOBJ("FakeSpikeBody", true));
 	modelGoalObj_.reset(Model::CreateFromOBJ("GoalObj", true));
-	spike_->Initialize(modelSpike1_.get(), modelSpike2_.get(), modelGoalObj_.get());
+	spike_->Initialize(modelSpike1_.get(), modelSpike2_.get(), modelSpike3_.get(), modelGoalObj_.get(), modelSpike4_.get());
 	
 	player_ = std::make_unique<Player>();
 	modelPlayer_[0].reset(Model::CreateFromOBJ("Player01", true));

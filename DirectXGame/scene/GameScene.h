@@ -76,6 +76,7 @@ private: // メンバ変数
 
 	std::unique_ptr<Model> modelSpike1_;
 	std::unique_ptr<Model> modelSpike2_;
+	std::unique_ptr<Model> modelSpike3_;
 	std::unique_ptr<Model> modelGoalObj_;
 	std::unique_ptr<Spike> spike_;
 
