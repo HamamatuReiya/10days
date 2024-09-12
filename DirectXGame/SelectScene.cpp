@@ -10,6 +10,9 @@ void SelectScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	// ビュープロジェクションの初期化
+	viewProjection_.Initialize();
+
 	//テクスチャの初期化
 	TextureInitialize();
 
@@ -22,6 +25,13 @@ void SelectScene::Initialize() {
 	fade_->Initialize();
 	// フェードインの開始
 	fade_->FadeInStart();
+
+	// 背景の生成
+	backGround_ = std::make_unique<BackGround>();
+	// 3Dモデルの生成
+	backGroundModel_.reset(Model::CreateFromOBJ("background", true));
+	// 背景の初期化
+	backGround_->Initialize(backGroundModel_.get());
 }
 
 void SelectScene::Update() { 
@@ -54,7 +64,8 @@ void SelectScene::Update() {
 
 	//カーソルの画像の移動用
 	textureCursor_->SetPosition(cursorPos_);
-
+	// 背景の更新
+	backGround_->Update();
 	// ステージ選択
 	StageSelect();
 	// フェードの更新
@@ -86,6 +97,9 @@ void SelectScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+
+	// 背景描画
+	backGround_->Draw(viewProjection_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
