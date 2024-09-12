@@ -11,6 +11,7 @@ void ResultScene::Initialize() {
 }
 
 void ResultScene::Update() {
+	textureDeleteTime += 1;
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneEnd_ = true;
 	}
@@ -54,7 +55,9 @@ void ResultScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 	
-	textureGameClear_->Draw();
+	if (textureDeleteTime % 10 != 0) {
+		textureGameClear_->Draw();
+	}
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -64,6 +67,7 @@ void ResultScene::Draw() {
 
 void ResultScene::SceneReset() { 
 	isSceneEnd_ = false; 
+	textureDeleteTime = 0;
 }
 
 void ResultScene::TextureInitialize() {

@@ -44,4 +44,6 @@ private:
 
 	// ゲームクリアの画像
 	Sprite* textureGameClear_;
+	int textureDeleteTime = 0;
+
 };
