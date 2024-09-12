@@ -45,6 +45,10 @@ public:
 	bool IsSceneEnd() { return isSceneEnd_; }
 	SceneType NextScene() { return SceneType::kGamePlay; }
 
+	void BGMReset();
+
+	void BGMStop();
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -69,7 +73,6 @@ private: // メンバ変数
 	uint32_t titleBGMHandle_;
 	uint32_t playTitleBGM_;
 	bool isTitleBGM_;
-	bool isTitleBGM;
 
 	// SE
 	uint32_t systemHandle_;

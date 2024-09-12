@@ -10,9 +10,9 @@
 #include "Scene.h"
 
 #include "fade/Fade.h"
-#include <Stage.h>
+#include "Stage.h"
 
-class SelectScene {
+class SelectScene : public StageSelect {
 public:
 	/// <summary>
 	/// コンストクラタ
@@ -42,9 +42,16 @@ public:
 public:
 	void SceneReset();
 
-	// 島
+	//
 	bool IsSceneEnd() { return isSceneEnd_; }
 	SceneType NextScene() { return SceneType::kGamePlay; }
+
+private:
+	// 画像の初期化
+	void TextureInitialize();
+
+	// ステージ選択
+	void StageSelect();
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -53,6 +60,16 @@ private: // メンバ変数
 
 	// シーンを終わらせる変数
 	bool isSceneEnd_ = false;
+
+	// 数字の画像
+	Sprite* textureNumber_[10];
+
+	// 矢印 カーソル
+	Sprite* textureCursor_;
+	Vector2 cursorPos_ = {0, 350};
+	Vector2 cursorSpeed_ = {0, 0};
+	int stageCount_ = 0;
+	const int kMaxStage_ = 3;
 
 	// フェード
 	std::unique_ptr<Fade> fade_;
