@@ -143,6 +143,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				gameScene->BGMStop();
 			}
 
+			if (gameScene->IsSceneEnd2()) {
+				// 次のシーンの値を代入してシーン切り替え
+				sceneNo = gameScene->NextScene2();
+
+				// ゲームシーンの初期化、フラグリセット等
+				gameScene->SceneReset();
+
+				// BGM
+				gameScene->BGMStop();
+			}
+
 			break;
 
 		case SceneType::kResult:

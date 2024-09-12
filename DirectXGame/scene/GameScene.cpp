@@ -55,7 +55,6 @@ void GameScene::Initialize() {
 	// 画像の表示時間
 	speedUPTextureTimer = 120.0f;
 	speedDownTextureTimer = 120.0f;
-
 }
 
 void GameScene::Update() { 
@@ -78,7 +77,12 @@ void GameScene::Update() {
 	// シーン移動
 #ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
-		isSceneEnd_ = true;
+		if (gameOverFlag == false) {
+			isSceneEnd_ = true;
+		} 
+		else {
+			isSceneEnd2_ = true;
+		}
 	}
 #endif // DEBUG
 
@@ -166,6 +170,10 @@ void GameScene::Draw() {
 	if (isSpeedDown == true) {
 		textureSpeedDown_->Draw();
 	}
+	// ゲームオーバー
+	if (gameOverFlag == true) {
+		textureGameOver_->Draw();
+	}
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -177,13 +185,13 @@ void GameScene::SceneReset() {
 	timer_->Reset(); 
 	speed = 0.2f;
 	isSceneEnd_ = false;
+	isSceneEnd2_ = false;
 	//audio_->StopWave(playChain_);
 	isSound = false;
 	speedUPTextureTimer = 120.0f;
 	speedDownTextureTimer = 120.0f;
 	isSpeedUP = false;
 	isSpeedDown = false;
-
 }
 
 void GameScene::BGMReset() { 
@@ -206,6 +214,12 @@ void GameScene::TextureInitialize() {
 	SpeedDownHandle = TextureManager::Load("SpeedDown.png");
 
 	textureSpeedDown_ = Sprite::Create(SpeedDownHandle, {500.0f, 100.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
+
+	// ゲームオーバーの画像
+	uint32_t GameOverHandle;
+	GameOverHandle = TextureManager::Load("GameOver.png");
+
+	textureGameOver_ = Sprite::Create(GameOverHandle, {500.0f, 400.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f});
 }
 
 void GameScene::ChackAllCollisions() { 

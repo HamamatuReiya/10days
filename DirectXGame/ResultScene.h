@@ -38,4 +38,10 @@ private:
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+
+	// 画像の初期化
+	void TextureInitialize();
+
+	// ゲームクリアの画像
+	Sprite* textureGameClear_;
 };

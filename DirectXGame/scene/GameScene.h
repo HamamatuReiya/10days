@@ -55,6 +55,11 @@ public:
 	bool IsSceneEnd() { return isSceneEnd_; }
 	SceneType NextScene() { return SceneType::kResult; }
 
+	bool isSceneEnd2_ = false;
+
+	bool IsSceneEnd2() { return isSceneEnd2_; }
+	SceneType NextScene2() { return SceneType::kTitle; }
+
 	void BGMReset();
 
 	void BGMStop();
@@ -79,6 +84,9 @@ private: // メンバ変数
 	// スピードダウンの画像
 	Sprite* textureSpeedDown_;
 	bool isSpeedDown;
+
+	// ゲームオーバーの画像
+	Sprite* textureGameOver_;
 
 	// Speed画像の表示時間
 	float speedUPTextureTimer;
